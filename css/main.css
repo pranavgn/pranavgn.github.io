@@ -1,0 +1,123 @@
+body {
+    overflow: hidden;
+    font-size: 100%;
+    height: 100vh;
+    cursor: none;
+}
+
+/*
+    this is the cursor div modifier
+*/
+
+body::selection{
+background: rgb(41, 41, 41);
+}
+
+/* 
+    this is the marquee menu controls
+*/
+
+.outer{
+    margin-left: -10vw;
+    border-style: hidden hidden hidden solid;
+    display: inline-block;
+    padding-left: 1em;
+    position: absolute;
+}
+
+.inner{
+    font-family: 'Helvetica';
+    font-size: calc(2em + 6.5vw);
+    font-weight: 700;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 2px;
+    letter-spacing: -.9vw;
+    line-height: calc(.7em + 1vw);
+    animation: marquee 30s linear infinite;
+    display: inline-block;
+    user-select: none;
+}
+
+.inner span:nth-of-type(2n){
+    font-size: calc(1em + 4.5vw);
+    -webkit-text-stroke-color: rgb(41, 41, 41);
+    pointer-events: auto;
+    transition: all .5s;
+    z-index: 55;
+}
+
+.inner span:nth-of-type(2n-1){
+    -webkit-text-stroke-color: rgba(80, 80, 80, 0.479);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.switcher{
+    position: relative;
+    top: 0%;
+    animation: switch 30s linear infinite;
+}
+
+@keyframes marquee {
+    100%{
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes switch{
+    0%, 50%{
+        top:0%;
+    }
+    50.01%, 100%{
+        top:100%;
+    }
+}
+
+.inner:hover .switcher{
+    animation-play-state: paused;
+}
+
+.inner:hover{
+    animation-play-state: paused;
+}
+
+.inner{
+    pointer-events: none;
+}
+
+.about:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    font-size: 102%;
+     transition: all .5s;
+}
+
+.design:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    transform: scale(1.2);
+     transition: all .5s;
+}
+
+.code:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    transform: scale(1.2);
+     transition: all .5s;
+}
+
+.social:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    transform: scale(1.2);
+     transition: all .5s;
+}
+
+.book:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    transform: scale(1.2);
+     transition: all .5s;
+}
+
+.blog:hover{
+    -webkit-text-fill-color: rgb(41, 41, 41);
+    transform: scale(1.2);
+     transition: all .5s;
+}
+
