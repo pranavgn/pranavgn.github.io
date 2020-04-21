@@ -28,11 +28,11 @@ background: rgb(41, 41, 41);
 
 .inner{
     font-family: 'Helvetica';
-    font-size: calc(2em + 6.5vw);
+    font-size: calc(2em + 8vw);
     font-weight: 700;
     -webkit-text-fill-color: white;
     -webkit-text-stroke: 2px;
-    letter-spacing: -.9vw;
+    letter-spacing: -.6vw;
     line-height: calc(.7em + 1vw);
     animation: marquee 30s linear infinite;
     display: inline-block;
@@ -40,7 +40,7 @@ background: rgb(41, 41, 41);
 }
 
 .inner span:nth-of-type(2n){
-    font-size: calc(1em + 4.5vw);
+    font-size: calc(1em + 6.5vw);
     -webkit-text-stroke-color: rgb(41, 41, 41);
     pointer-events: auto;
     transition: all .5s;
@@ -49,6 +49,7 @@ background: rgb(41, 41, 41);
 
 .inner span:nth-of-type(2n-1){
     -webkit-text-stroke-color: rgba(80, 80, 80, 0.479);
+    -webkit-text-fill-color: rgba(0,0,0,0);
     pointer-events: none;
     z-index: 0;
 }
@@ -121,4 +122,3 @@ background: rgb(41, 41, 41);
     transform: scale(1.2);
      transition: all .5s;
 }
-
