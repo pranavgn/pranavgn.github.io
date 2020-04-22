@@ -16,7 +16,7 @@
                 border-radius: 50%;
                 transform: translate(-50%,-50%);
                 transition: 50ms;
-                transition-timing-function:;
+                transition-timing-function:ease-out ;
                 mix-blend-mode: difference;
                 z-index: 200;
                 pointer-events: none;
@@ -31,7 +31,6 @@
                 pointer-events: none;
                 mix-blend-mode: difference;
                 position: absolute;
-                transition-timing-function:;
             }
             .loader-wrapper{
                 background-color: white;
@@ -42,7 +41,7 @@
                 top: 0;
                 left: 0;
                 margin: 0px;
-                transition: 400ms;
+                transition: 100ms;
                 pointer-events: none;
                 display: flex;
                 align-items: center;
@@ -109,6 +108,11 @@
                 100%{
                     transform: rotate(9deg);
                 }}
+
+            a{
+                text-decoration: none;
+                cursor:none;
+            }
         </style>
         <title>pranav nair</title>
     </head>
@@ -126,34 +130,34 @@
         <div class="menu">
             
         </div>
-
+        <div class="full" data-tilt data-tilt-full-page-listening data-tilt-max="2" data-tilt-reverse>
         <!-- PURE CSS INTERACTIVE MARQUEE-->
         <div class="outer">
             <div class="inner">
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher about use"><a>about</a></span><br>
+                <span class="switcher about use"><a class="link" href="html/about/about.html">about</a></span><br>
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher design use"><a>design</a></span><br>
+                <span class="switcher design use"><a class="link" href="html/design/design.html">design</a></span><br>
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher code use"><a>code</a></span><br>
+                <span class="switcher code use"><a class="link" href="html/code/code.html">code</a></span><br>
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher social use"><a>social</a></span><br>
+                <span class="switcher social use"><a class="link" href="html/social/social.html">social</a></span><br>
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher book use"><a>book</a></span><br>
+                <span class="switcher book use"><a class="link" href="html/book/book.html">book</a></span><br>
                 <span class="switcher">pranav nair</span><br>
-                <span class="switcher blog use"><a>blog</a></span><br>
+                <span class="switcher blog use"><a class="link" href="html/blog/blog.html">blog</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="about use"><a>about</a></span><br>
+                <span class="about use"><a class="link" href="html/about.html">about</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="design use"><a>design</a></span><br>
+                <span class="design use"><a class="link" href="html/design/design.html">design</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="code use"><a>code</a></span><br>
+                <span class="code use"><a class="link" href="html/code/code.html">code</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="social use"><a>social</a></span><br>
+                <span class="social use"><a class="link" href="html/social/social.html">social</a></span><br>
                 <span >pranav nair</span><br>
-                <span class="book use"><a>book</a></span><br>
+                <span class="book use"><a class="link" href="html/book/book.html">book</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="blog use"><a>blog</a></span><br>
+                <span class="blog use"><a class="link" href="html/blog/blog.html">blog</a></span><br>
             </div>    
         </div>
         
@@ -164,7 +168,7 @@
                 </span>
             </div>
         </div>
-
+    </div>
         <!-- outer cursor div-->
         <div class="cursor">
         </div>
@@ -172,6 +176,12 @@
         <div class="cursor2">
         </div>
         <!-- JS Main File-->
+        
+        <script>
+            /* loader control js */
+            setTimeout(function(){document.querySelector('.loader-wrapper').style.opacity = "0"; },5300)
+        </script>
+        
         <script>
             /*kinda laggy cursor control js */
                 const cursor = document.querySelector('.cursor');
@@ -183,11 +193,14 @@
                 document.addEventListener('mousemove', e => {
                     cursor2.setAttribute("style", "top: "+e.pageY+"px; left: "+e.pageX+"px;")
                 })
+
+                const all = document.querySelectorAll(".use");
+                document.addEventListener('mouseOver', function(){
+                    cursor.style.transform = scale(2)
+                })
         </script>
-        <script>
-            /* loader control js */
-            setTimeout(function(){document.querySelector('.loader-wrapper').style.transform = "translateY(-150vh)"},5300)
-            
+        <script src="js/vanilla-tilt.min.js">
         </script>
+
     </body>
 </html>
