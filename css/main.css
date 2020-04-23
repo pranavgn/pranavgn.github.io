@@ -17,6 +17,7 @@ background: rgb(41, 41, 41);
     position: absolute;
     height: 100vh;
     width: 100vw;
+    transition: 800ms;
 }
 
 .outer{
@@ -41,7 +42,7 @@ background: rgb(41, 41, 41);
 
 .inner span:nth-of-type(2n){
     font-size: calc(1em + 6.5vw);
-    -webkit-text-stroke-color: rgb(41, 41, 41);
+    -webkit-text-stroke-color: rgb(0, 0, 0);
     pointer-events: auto;
     transition: all .5s;
     z-index: 55;
@@ -122,3 +123,8 @@ background: rgb(41, 41, 41);
     transform: scale(1.2);
      transition: all .5s;
 }
+
+.cursor.enlarged {
+    width: 50px;
+    height: 50px;
+  }

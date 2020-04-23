@@ -12,14 +12,19 @@
                 width: 25px;
                 height: 25px;
                 position: absolute;
-                border: 2px solid rgb(41, 41, 41);
+                border: 2px solid rgb(83, 83, 83);
                 border-radius: 50%;
                 transform: translate(-50%,-50%);
                 transition: 50ms;
                 transition-timing-function:ease-out ;
-                mix-blend-mode: difference;
+                mix-blend-mode: exclusion;
                 z-index: 200;
                 pointer-events: none;
+                transition: 
+                    top 50ms linear,
+                    left 50ms linear,
+                    width 500ms ease,
+                    height 500ms ease;
             }
             .cursor2{
                 z-index: 200;
@@ -113,6 +118,7 @@
                 text-decoration: none;
                 cursor:none;
             }
+
         </style>
         <title>pranav nair</title>
     </head>
@@ -130,7 +136,7 @@
         <div class="menu">
             
         </div>
-        <div class="full" data-tilt data-tilt-full-page-listening data-tilt-max="2" data-tilt-reverse>
+        <div class="full">
         <!-- PURE CSS INTERACTIVE MARQUEE-->
         <div class="outer">
             <div class="inner">
@@ -168,7 +174,7 @@
                 </span>
             </div>
         </div>
-    </div>
+        </div>
         <!-- outer cursor div-->
         <div class="cursor">
         </div>
@@ -194,12 +200,25 @@
                     cursor2.setAttribute("style", "top: "+e.pageY+"px; left: "+e.pageX+"px;")
                 })
 
-                const all = document.querySelectorAll(".use");
-                document.addEventListener('mouseOver', function(){
-                    cursor.style.transform = scale(2)
+                const links = document.querySelectorAll('a')
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', e => {
+                    cursor.classList.add('enlarged')
+                })
+                link.addEventListener('mouseout', e => {
+                    cursor.classList.remove('enlarged')
+                })
                 })
         </script>
-        <script src="js/vanilla-tilt.min.js">
+        <script>
+            /* js parallax */
+            var x = window.innerWidth;
+                y = window.innerHeight;
+            const full = document.querySelector('.full');
+                document.addEventListener('mousemove', e => {
+                    full.setAttribute("style", "top: "+(y - e.pageY)/25 + "px; left: "+(x - e.pageX)/45 +"px;")
+                })
         </script>
 
     </body>
