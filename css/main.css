@@ -17,7 +17,6 @@ background: rgb(41, 41, 41);
     position: absolute;
     height: 100vh;
     width: 100vw;
-    transition: 800ms;
 }
 
 .outer{
