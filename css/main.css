@@ -4,114 +4,71 @@
     this is the marquee menu controls
 */
 
-.full{
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-}
-
 .outer{
     margin-left: -10vw;
     display: inline-block;
-    position: absolute;
+    position: fixed;
     transform: rotate(9deg);
 }
 
-.inner{
+.marquee{
     font-family: 'Helvetica';
     font-size: calc(2em + 8vw);
     font-weight: 700;
-    -webkit-text-fill-color: rgba(0,0,0,0);
     -webkit-text-stroke: 2px;
     letter-spacing: -.6vw;
     line-height: calc(.7em + 1vw);
-    animation: marquee 30s linear infinite;
     display: inline-block;
     user-select: none;
+    backface-visibility: hidden;
+    pointer-events: none;
 }
 
-.inner span:nth-of-type(2n){
+.use{
+    color: transparent;
     font-size: calc(1em + 6.5vw);
     -webkit-text-stroke-color: rgb(0, 0, 0);
+    color: transparent;
     pointer-events: auto;
     transition: all .5s;
     z-index: 55;
 }
 
-.inner span:nth-of-type(2n-1){
+.marquee span:nth-of-type(2n-1){
     -webkit-text-stroke-color: rgba(54, 54, 54, 0.479);
-    -webkit-text-fill-color: rgba(0,0,0,0);
+    color: transparent;
     pointer-events: none;
     z-index: 0;
 }
 
-.switcher{
-    position: relative;
-    top: 0%;
-    animation: switch 30s linear infinite;
-}
-
-@keyframes marquee {
-    100%{
-        transform: translateY(-100%);
-    }
-}
-
-@keyframes switch{
-    0%, 50%{
-        top:0%;
-    }
-    50.01%, 100%{
-        top:100%;
-    }
-}
-
-.inner:hover .switcher{
-    animation-play-state: paused;
-}
-
-.inner:hover{
-    animation-play-state: paused;
-}
-
-.inner{
-    pointer-events: none;
-}
-
 .about:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    font-size: 102%;
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 .design:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    transform: scale(1.2);
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 .code:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    transform: scale(1.2);
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 .social:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    transform: scale(1.2);
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 .book:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    transform: scale(1.2);
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 .blog:hover{
-    -webkit-text-fill-color: rgb(41, 41, 41);
-    transform: scale(1.2);
-     transition: all .5s;
+    color: rgb(41, 41, 41);
+    transition: all .5s;
 }
 
 /* The Menu controller */
@@ -123,25 +80,28 @@
     opacity: 0;
     pointer-events: none;
     z-index: 605;
+    backface-visibility: hidden;
 }
 #menuhead{
     position: fixed;
     font-size: calc(2em + 4vw);
     font-weight: 800;
     font-family: Helvetica;
-    -webkit-text-stroke: 3px;
+    -webkit-text-stroke: 2px;
     -webkit-text-stroke-color: white;
-    -webkit-text-fill-color: rgba(0,0,0,0);
+    color: rgba(0,0,0,0);
     user-select: none;
     top: 5%;
     left: 10%;
     z-index: 610;
+    backface-visibility: hidden;
 }
 .organization{
     position: fixed;
     top: 30%;
     left: 20%;
     z-index: 610;
+    backface-visibility: hidden;
 }
 .navbarcontainer{
     line-height: -.5em;
@@ -151,8 +111,9 @@
     transition: all 500ms;
     -webkit-text-stroke: 2px;
     -webkit-text-stroke-color: white;
-    -webkit-text-fill-color: white;
+    color: white;
     user-select: none;
+    backface-visibility: hidden;
 }
 #menulabel{
     display: block;
@@ -221,5 +182,5 @@ input {
     transition: all 500ms;
     -webkit-text-stroke: 2px;
     -webkit-text-stroke-color: white;
-    -webkit-text-fill-color: transparent;
+    color: transparent;
 }

@@ -2,11 +2,10 @@
 <html>
     <head>
         <meta charset = "utf-8">
-        <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
-        <META HTTP-EQUIV="Expires" CONTENT="-1">
         <meta name="viewport" height ="device-height" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/favicon.png">
         <link rel= "stylesheet" href='css/main.css'>
+        <script src="js/jquery.min.js"></script>
         <style>
             .cursor{
                 width: 25px;
@@ -26,6 +25,7 @@
                     left 50ms linear,
                     width 500ms ease,
                     height 500ms ease;
+                backface-visibility: hidden;
             }
             .cursor2{
                 z-index: 800;
@@ -37,6 +37,7 @@
                 pointer-events: none;
                 mix-blend-mode: difference;
                 position: absolute;
+                backface-visibility: hidden;
             }
             .loader-wrapper{
                 background-color: white;
@@ -154,7 +155,7 @@
         <!-- MENU ICON-->
         <div class="menu">
             <input type="checkbox" id="check" ></input>
-            <label for="check" id="menulabel">||
+            <label for="check" id="menulabel">&#8801;
             </label>
             <div id="blockbox"></div>
             <div id="textcontainer">
@@ -166,34 +167,21 @@
                 </div>
             </div>               
         </div>
-    <div class="full">
         <!-- PURE CSS INTERACTIVE MARQUEE-->
         <div class="outer">
-            <div class="inner">
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher about use"><a class="link" href="html/about/about.html">about</a></span><br>
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher design use"><a class="link" href="html/design/design.html">design</a></span><br>
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher code use"><a class="link" href="html/code/code.html">code</a></span><br>
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher social use"><a class="link" href="html/social/social.html">social</a></span><br>
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher book use"><a class="link" href="html/book/book.html">book</a></span><br>
-                <span class="switcher">pranav nair</span><br>
-                <span class="switcher blog use"><a class="link" href="html/blog/blog.html">blog</a></span><br>
+            <div class="marquee">
                 <span>pranav nair</span><br>
-                <span class="about use"><a class="link" href="html/about/about.html">about</a></span><br>
+                <span><a class="link use about" href="html/about/about.html">about</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="design use"><a class="link" href="html/design/design.html">design</a></span><br>
+                <span><a class="link use design" href="html/design/design.html">design</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="code use"><a class="link" href="html/code/code.html">code</a></span><br>
+                <span><a class="link use code" href="html/code/code.html">code</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="social use"><a class="link" href="html/social/social.html">social</a></span><br>
+                <span><a class="link use social" href="html/social/social.html">social</a></span><br>
                 <span >pranav nair</span><br>
-                <span class="book use"><a class="link" href="html/book/book.html">book</a></span><br>
+                <span><a class="link use book" href="html/book/book.html">book</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="blog use"><a class="link" href="html/blog/blog.html">blog</a></span><br>
+                <span><a class="link use blog" href="html/blog/blog.html">blog</a></span><br>
             </div>    
         </div>
         
@@ -204,7 +192,6 @@
                 </span>
             </div>
         </div>
-    </div>
         <!-- outer cursor div-->
         <div class="cursor">
         </div>
@@ -249,21 +236,27 @@
                     cursor.classList.remove('enlarged')
                     })
                 })
-        </script>
-        <script>
-            /* js parallaxing */
-            var x = window.innerWidth;
-                y = window.innerHeight;
-            const full = document.querySelector('.full');
-                document.addEventListener('mousemove', e => {
-                    full.setAttribute("style", "left: "+(x - e.pageX)/45 +"px;")
-                })
-        </script>
-        <script>
         setTimeout(uncheck, 4800)
         function uncheck() {
             document.getElementById("check").checked = false;
         }        
+        </script>
+        <script src="js/jquery.marquee.min.js"></script>
+        <script>
+            $('.marquee').marquee({
+	//duration in milliseconds of the marquee
+	duration: 15000,
+	//gap in pixels between the tickers
+	gap: 0,
+	//time in milliseconds before the marquee will start animating
+	delayBeforeStart: 0,
+	//'left' or 'right'
+	direction: 'up',
+	//true or false - should the marquee be duplicated to show an effect of continues flow
+    duplicated: true,
+    startVisible: true,
+    pauseOnHover: true
+});
         </script>
     </body>
 </html>
