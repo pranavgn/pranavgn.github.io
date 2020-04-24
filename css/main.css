@@ -1,13 +1,4 @@
-body {
-    overflow: hidden;
-    font-size: 100%;
-    height: 100vh;
-    cursor: none;
-}
 
-body::selection{
-background: rgb(41, 41, 41);
-}
 
 /* 
     this is the marquee menu controls
@@ -48,7 +39,7 @@ background: rgb(41, 41, 41);
 }
 
 .inner span:nth-of-type(2n-1){
-    -webkit-text-stroke-color: rgba(80, 80, 80, 0.479);
+    -webkit-text-stroke-color: rgba(54, 54, 54, 0.479);
     -webkit-text-fill-color: rgba(0,0,0,0);
     pointer-events: none;
     z-index: 0;
@@ -123,7 +114,112 @@ background: rgb(41, 41, 41);
      transition: all .5s;
 }
 
-.cursor.enlarged {
-    width: 50px;
-    height: 50px;
-  }
+/* The Menu controller */
+
+.menu{
+    position: absolute ;
+}
+#textcontainer{
+    opacity: 0;
+    pointer-events: none;
+    z-index: 605;
+}
+#menuhead{
+    position: fixed;
+    font-size: calc(2em + 4vw);
+    font-weight: 800;
+    font-family: Helvetica;
+    -webkit-text-stroke: 3px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: rgba(0,0,0,0);
+    user-select: none;
+    top: 5%;
+    left: 10%;
+    z-index: 610;
+}
+.organization{
+    position: fixed;
+    top: 30%;
+    left: 20%;
+    z-index: 610;
+}
+.navbarcontainer{
+    line-height: -.5em;
+    font-size: calc(2em + 6vw);
+    font-family: Helvetica;
+    font-weight: 600;
+    transition: all 500ms;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: white;
+    user-select: none;
+}
+#menulabel{
+    display: block;
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    width: 5vw;
+    height: 5vw;
+    position: fixed;
+    top: 80%;
+    left: 85%;
+    transition: all 300ms;
+    transition-delay: 300ms;
+    font-family: Helvetica;
+    font-size: calc(2em + 2vw);
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    z-index: 650;
+    user-select: none;
+    border: 2px solid black;
+}
+#menulabel:hover{
+    border: 2px solid rgb(253, 72, 0);
+    color: rgb(255, 186, 159);
+}
+#blockbox {
+    position: fixed;
+    transition: all 300ms;
+    z-index: 0;
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    width: 5vw;
+    height: 5vw;
+    top: 80%;
+    left: 85%;
+}
+
+input:checked ~ #blockbox{
+    width: 110vw;
+    height: 110vh;
+    top: -10vh;
+    left: -10vw;
+    border-radius: 0;
+    z-index: 600;
+}
+
+input:checked ~ #menulabel{
+    background: rgb(255, 255, 255);
+    color: black;
+    border:2px solid white;
+    transform: rotate(270deg);
+}
+
+input:checked ~ #textcontainer{
+    pointer-events: auto;
+    opacity: 1;
+    transition: all 350ms;
+    transition-delay: 350ms;
+}
+input {
+   visibility: hidden;
+   position: absolute;
+}
+.navbarcontainer:hover{
+    transition: all 500ms;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: transparent;
+}

@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset = "utf-8">
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+        <META HTTP-EQUIV="Expires" CONTENT="-1">
         <meta name="viewport" height ="device-height" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/favicon.png">
         <link rel= "stylesheet" href='css/main.css'>
-        <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@900&display=swap" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <style>
             .cursor{
                 width: 25px;
@@ -18,21 +18,22 @@
                 transition: 50ms;
                 transition-timing-function:ease-out ;
                 mix-blend-mode: exclusion;
-                z-index: 200;
+                z-index: 800;
                 pointer-events: none;
                 transition: 
+                    color 100ms ease,
                     top 50ms linear,
                     left 50ms linear,
                     width 500ms ease,
                     height 500ms ease;
             }
             .cursor2{
-                z-index: 200;
+                z-index: 800;
                 transition: 10ms;
                 width: 5px;
                 height: 5px;
                 border-radius: 50%;
-                background-color: black;
+                background-color: rgb(83, 83, 83);
                 pointer-events: none;
                 mix-blend-mode: difference;
                 position: absolute;
@@ -117,6 +118,24 @@
             a{
                 text-decoration: none;
                 cursor:none;
+                outline: 0;
+            }
+
+            .cursor.enlarged {
+                width: 50px;
+                height: 50px;
+                border-color: rgb(253, 72, 0);
+            }
+            
+            body {
+                    overflow: hidden;
+                    font-size: 100%;
+                    height: 100vh;
+                    cursor: none;
+                }
+
+            body::selection{
+                background: rgb(41, 41, 41);
             }
 
         </style>
@@ -134,9 +153,20 @@
     
         <!-- MENU ICON-->
         <div class="menu">
-            
+            <input type="checkbox" id="check" ></input>
+            <label for="check" id="menulabel">||
+            </label>
+            <div id="blockbox"></div>
+            <div id="textcontainer">
+                <p id="menuhead">menu</p>
+                <div class="organization">
+                    <pre><a class="link navbarcontainer" href="html/about/about.html">about.</a> &nbsp; &nbsp;    <a class="link navbarcontainer" href="html/design/design.html">design.</a>
+<a class="link navbarcontainer" href="html/code/code.html">code.</a> &nbsp; &nbsp;     <a class="link navbarcontainer" href="html/social/social.html">social.</a>
+<a class="link navbarcontainer" href="html/book/book.html">book.</a> &nbsp; &nbsp;     <a class="link navbarcontainer" href="html/blog/blog.html">blog.</a></pre>
+                </div>
+            </div>               
         </div>
-        <div class="full">
+    <div class="full">
         <!-- PURE CSS INTERACTIVE MARQUEE-->
         <div class="outer">
             <div class="inner">
@@ -153,7 +183,7 @@
                 <span class="switcher">pranav nair</span><br>
                 <span class="switcher blog use"><a class="link" href="html/blog/blog.html">blog</a></span><br>
                 <span>pranav nair</span><br>
-                <span class="about use"><a class="link" href="html/about.html">about</a></span><br>
+                <span class="about use"><a class="link" href="html/about/about.html">about</a></span><br>
                 <span>pranav nair</span><br>
                 <span class="design use"><a class="link" href="html/design/design.html">design</a></span><br>
                 <span>pranav nair</span><br>
@@ -174,7 +204,7 @@
                 </span>
             </div>
         </div>
-        </div>
+    </div>
         <!-- outer cursor div-->
         <div class="cursor">
         </div>
@@ -210,9 +240,18 @@
                     cursor.classList.remove('enlarged')
                 })
                 })
+                const labels = document.querySelectorAll('label')
+                labels.forEach(label => {
+                    label.addEventListener('mouseenter', e => {
+                    cursor.classList.add('enlarged')
+                    })
+                    label.addEventListener('mouseout', e => {
+                    cursor.classList.remove('enlarged')
+                    })
+                })
         </script>
         <script>
-            /* js parallax */
+            /* js parallaxing */
             var x = window.innerWidth;
                 y = window.innerHeight;
             const full = document.querySelector('.full');
@@ -220,6 +259,11 @@
                     full.setAttribute("style", "left: "+(x - e.pageX)/45 +"px;")
                 })
         </script>
-
+        <script>
+        setTimeout(uncheck, 4800)
+        function uncheck() {
+            document.getElementById("check").checked = false;
+        }        
+        </script>
     </body>
 </html>

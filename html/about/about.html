@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <meta name="viewport" height ="device-height" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../../images/favicon.png">
+        <link rel= "stylesheet" href='css/main.css'>
+        <style>
+            .cursor{
+                width: 25px;
+                height: 25px;
+                position: absolute;
+                border: 2px solid rgb(83, 83, 83);
+                border-radius: 50%;
+                transform: translate(-50%,-50%);
+                transition: 50ms;
+                transition-timing-function:ease-out ;
+                mix-blend-mode: exclusion;
+                z-index: 200;
+                pointer-events: none;
+                transition: 
+                    top 50ms linear,
+                    left 50ms linear,
+                    width 500ms ease,
+                    height 500ms ease;
+            }
+            .cursor2{
+                z-index: 200;
+                transition: 10ms;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: rgb(83, 83, 83);
+                pointer-events: none;
+                mix-blend-mode: difference;
+                position: absolute;
+            }
+            .cursor.enlarged {
+                width: 50px;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- outer cursor div-->
+        <div class="cursor">
+        </div>
+        <!-- inner cursor div-->
+        <div class="cursor2">
+        </div>
+        <!-- JS Main File-->
+        <script>
+            /*kinda laggy cursor control js */
+                const cursor = document.querySelector('.cursor');
+                document.addEventListener('mousemove', e => {
+                    cursor.setAttribute("style", "top: "+e.pageY+"px; left: "+e.pageX+"px;")
+                })
+
+                const cursor2 = document.querySelector('.cursor2');
+                document.addEventListener('mousemove', e => {
+                    cursor2.setAttribute("style", "top: "+e.pageY+"px; left: "+e.pageX+"px;")
+                })
+
+                const links = document.querySelectorAll('a')
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', e => {
+                    cursor.classList.add('enlarged')
+                })
+                link.addEventListener('mouseout', e => {
+                    cursor.classList.remove('enlarged')
+                })
+                })
+        </script>
+    </body>
+</html>
