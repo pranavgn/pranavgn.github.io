@@ -1,0 +1,286 @@
+$bgcolor: rgb(256, 256, 256)
+
+@font-face 
+      font-family: CooperHewittHeavy
+      src: url(../fonts/CooperHewitt-Heavy.otf)
+
+
+@font-face 
+      font-family: RegloBold
+      src: url(../fonts/Reglo-Bold.otf)
+
+
+@font-face 
+      font-family: Mainz
+      src: url(../fonts/Mainz.otf)
+
+
+@font-face 
+      font-family: KarrikReg
+      src: url(../fonts/Karrik-Regular.woff)
+
+
+@font-face 
+      font-family: SaintJeanReg
+      src: url(../fonts/Saintjean-Regular.otf)
+
+
+/* affects all */
+
+* 
+      box-sizing: border-box
+
+a
+      color: black
+      text-decoration: none
+
+/* positioning */
+
+/* header elements */
+
+.nametag 
+      width: 75vw
+      height: auto
+      margin: auto
+
+
+#nametag2 
+      line-height: 0.6
+
+
+.eq 
+      flex: 1 1 auto
+
+.flex-eq-bar  
+      display: flex
+      flex-wrap: wrap
+      flex-direction: row
+      flex-basis: auto
+
+.flex-bar-sh
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      width: 100%
+      height: 60vh
+      align-items: flex-start
+      justify-content: center
+
+.flex-bar 
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      width: 100%
+      flex: 0 1 auto
+      height: fit-content
+
+.justify
+      align-items: flex-start
+      justify-content: center
+      align-content: center
+
+
+.flex-col 
+      display: flex
+      flex-direction: column
+      flex-wrap: wrap
+      height: fit-content
+
+#work
+      scroll-snap-type: y mandatory
+      scroll-snap-points-y: repeat(75vh)
+
+.card 
+      width: 100vw
+      height:75vh
+      background-color: $bgcolor
+      scroll-snap-align: start
+      scroll-snap-stop: always
+
+.card:nth-child(1)
+      top: 6rem
+
+@for $i from 2 through 4 
+      .card:nth-child(#{$i}n)
+            top: 2rem + $i * 2rem
+
+.scrolling-wrapper
+      overflow-x: scroll
+      overflow-y: hidden
+      white-space: nowrap
+      margin-top: 5vh
+      vertical-align: text-top
+
+      .box
+            display: inline-block
+
+      & img
+            inline-size: 55vh
+            writing-mode: vertical-rl
+.content
+      inline-size: 55vh
+      word-wrap: break-word
+      width: 20vw
+      white-space: normal
+      vertical-align: text-top
+
+.rot
+      transform: rotate3d(-90deg)
+
+.scrolling-wrapper::-webkit-scrollbar
+      display: none
+
+
+// animation classes
+
+.transition-shrink
+      transform-origin: top left
+
+
+/* REUSABLE CLASSES */
+
+/* positioning */
+
+.fixed 
+      position: fixed
+
+
+.absolute 
+      position: absolute
+
+
+.relative 
+      position: relative
+
+
+/* decoration */
+
+/* elements */
+
+html, body 
+      background-color: var($bgcolor)
+      padding: 0
+      margin: 0
+      overflow-x: hidden
+
+.link
+      cursor: pointer
+
+.link:hover
+      color: rgb(255, 87, 16)
+
+.link3
+      text-decoration: underline
+      color: rgb(255, 87, 16)
+
+.link3:hover
+      -webkit-text-stroke: 2px rgb(255, 87, 16)
+      color: transparent
+
+/* color classes */
+
+.bodyfillbg 
+      background-color: var($bgcolor)
+
+
+/* font family classes */
+
+.displayfill 
+      font-family: CooperHewittHeavy
+
+
+.displayhollow 
+      font-family: RegloBold
+
+
+
+.bodyfontreg 
+      font-family: KarrikReg
+      font-size: 4rem
+
+
+.bodyfontregsmall 
+      font-family: KarrikReg
+      font-size: 2rem
+
+
+.accent 
+      font-family: Mainz
+      font-size: 4rem
+
+
+.accent2 
+      font-family: SaintJeanReg
+      font-size: 5rem
+
+
+/* font positioning */
+
+.centertext 
+      text-align: center
+
+
+/* outline classes */
+
+.seperator 
+      width: 100%
+      // border-top: 2px solid black
+      padding-top: 1em
+
+
+.outline 
+      border: 2px solid black
+
+.outline-top
+      border-top: 2px solid black
+
+.outline-bottom
+      border-bottom: 2px solid black
+
+
+/* layer classes */
+.l0 
+      z-index: -1
+
+
+.l1 
+      z-index: 1
+
+
+.l2 
+      z-index: 2
+
+
+.l3 
+      z-index: 3
+
+
+.l9 
+      z-index: 9
+
+
+.l10 
+      z-index: 10
+
+
+/* layer blend modes */
+
+.contrast 
+      color: white
+      mix-blend-mode: difference
+
+.shade
+      mix-blend-mode: difference
+
+
+/* pointer events */
+
+.nopointer 
+      pointer-events: none
+
+
+.pointer 
+      pointer-events: all
+
+
+/* custom css */
