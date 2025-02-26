@@ -1,0 +1,45 @@
+/* Your CSS goes here! */
+body {
+      padding: 0;
+      margin: 0;
+}
+
+.navbar {
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding-left: 5vw;
+      margin-top: -2vh;
+      padding-top: 3vh;
+      position: fixed;
+}
+
+.m-2 {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 1.5em;
+}
+
+.m-3{
+      padding-left: 5vw;
+      padding-top: 10vh;
+}
+
+h1{
+      font-size: 4em;
+}
+
+h2{
+      text-align: right;
+      margin-right: 5vw;
+      font-size: 4em;
+}
+
+.bold-body{
+      font-size: 1.5em;
+}
+
+.bold-body2{
+      font-size: 1.2em;
+}
