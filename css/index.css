@@ -1,0 +1,23 @@
+.collapse {
+      display: inline-block;
+      content-visibility: auto;
+      transition: all 400ms ease-out;
+      white-space: nowrap;
+      vertical-align: top;
+      /* width: fit-content;
+      height: fit-content;
+      max-width: 100%;
+      max-height: 100%; */
+}
+
+.uncollapse {
+      display: inline-block;
+      content-visibility: auto;
+      transition: all 400ms ease-out 100ms;
+      white-space: nowrap;
+      vertical-align: top;
+      /* width: fit-content;
+      height: fit-content;
+      max-width: 0;
+      max-height: 0; */
+}
