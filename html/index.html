@@ -1,18 +1,198 @@
 <html>
       <head>
             <title>Pranav Nair | Home</title>
+            <!-- seo and info -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+            <!-- stylesheet imports -->
             <link rel="stylesheet" href="../css/index.css">
-            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+            <!-- gsap imports -->
+            <script src="../js/gsap.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Flip.min.js"></script>
       </head>
       <body>
-            <canvas id="body-cover-halftone-grid"></canvas>
-            <div class="pure-g">
-                  <button id="test">Collapse</button>
-                  <div><h1>P<span class="collapse">RANAV &nbsp;</span><span class="uncollapse">G</span><span class="collapse">&nbsp;</span>N<span class="collapse">AIR</span></h1></div>
+            <!-- <canvas id="body-cover-halftone-grid"></canvas> -->
+
+            <!-- canvas effect overlay -->
+            <!-- <canvas id="canvas-effect-overlay" class="fw fh"></canvas> -->
+            <div id='pan-container'>
+                  <span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span><!--
+                  --><span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span><!--
+                  --><span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span>
             </div>
-            <script type="text/javascript" src="../js/index.js" content></script>
+
+            <!-- navbar -->
+            <div id="navbar">
+                  <h1 id="title-name-text" class="hover-after">
+                        <span id="split-left"><!-- 
+                              --><span class="tp">P</span><!-- 
+                              --><span class="collapse hide">RANA</span><!-- 
+                              --><span class="uncollapse">G</span><!-- 
+                              --><span class="uncollapse">N</span><!-- 
+                        --></span><!-- 
+                        --><span id="split-right"><!--
+                              --><span id="switch">V<!-- 
+                              --><div id="bounce"></div><!-- 
+                              --></span><!-- 
+                              --><span class="collapse">&nbsp;</span><!-- 
+                              --><span class="collapse tp">N</span><!-- 
+                              --><span class="collapse hide">AIR</span><!-- 
+                        --></span>
+                  </h1>
+                  <div id="link-container">
+                        <div id="scroller"></div>
+                        <!-- <div id="scroller-shadow"></div> -->
+                        <a class="navbar-link " id="nav-link-1" href="./game.html">work</a>
+                        <a class="navbar-link " id="nav-link-2">about</a>
+                        <a class="navbar-link " id="nav-link-3">contact</a>
+                        <a class="navbar-link " id="nav-link-4">news</a>
+                  </div>
+            </div>
+
+            <!-- body content -->
+            <div class="grid-container-4-5 fw fh">
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+                  <div class="grid-item"></div>
+            </div>
+            <div class="grid-container-4-5 fw fh">
+            </div>
+            <div class="grid-container-4-5 fw fh">
+            </div>
+
+            <script type="text/javascript">
+                  // trigger gsap code on content load
+                  document.addEventListener("DOMContentLoaded", function(event) {
+                        // gsap imports
+                        gsap.registerPlugin(Flip);
+                        gsap.registerPlugin(ScrollTrigger);
+                        
+                        // find elements
+                        let flip = document.getElementById('switch')
+                        let bounce = document.getElementById('bounce')
+                        let coll = document.getElementsByClassName('collapse');
+                        let uncoll = document.getElementsByClassName('uncollapse');
+                        let nLink = document.getElementsByClassName('navbar-link');
+                        let linkContainer = document.getElementById('link-container');
+                        let scroller = document.getElementById('scroller');
+                        let scrollerShadow = document.getElementById('scroller-shadow');
+                        
+                        // do math
+                        // find the beginning of each nLink
+                        // let n1X = nLink1.offsetLeft - convertRemToPixels(1.3)Width / 2;
+                        // let n2X = nLink2.offsetLeft + nLink2.offsetWidth / 2 - convertRemToPixels(1.3)Width / 2;
+                        // let n3X = nLink3.offsetLeft + nLink3.offsetWidth / 2 - convertRemToPixels(1.3)Width / 2;
+                        // let n4X = nLink4.offsetLeft + nLink4.offsetWidth - convertRemToPixels(1.3)Width / 2;
+                        
+                        let vX;
+                        let vY;
+                        
+                        // set initial position of selector
+                        [vX, vY, n1X, n2X, n3X, n4X] = updateSelectorPos();
+                        
+                        // v2Y = nLink1.getBoundingClientRect().top - coll[0].getBoundingClientRect().bottom - convertRemToPixels(1.3)Width;
+                        v2Y = flip.offsetTop - bounce.offsetHeight;
+                        nX = uncoll[0].offsetWidth / 2;
+                        let offsetX = flip.offsetWidth / 2;
+
+                        // 
+                        
+                        // start timeline
+                        let tlTitle = gsap.timeline();
+                        tlTitle.pause(0);
+                        tlTitle.to(bounce, {
+                              width: '1.35rem', 
+                              transform: `translateX(calc(-50%)) translateY(-50%)`, 
+                              left: (vX + offsetX),
+                              borderBottom: 'solid 1px black',
+                              borderRadius: '1.3rem',
+                              duration:0.1, 
+                              ease: 'power3.out'
+                        }, 0)
+                        tlTitle.to(bounce, {
+                              backgroundColor: 'blue',
+                              duration:0.2
+                        }, 0.05)
+                        tlTitle.to(nLink, {width: 0, duration:0.1, ease: 'power3.out'}, 0)
+                        tlTitle.to(bounce, {
+                              top: v2Y, 
+                              transform: 'translateX(-50%) translateY(0)', 
+                              borderTop: 'solid 1px black',
+                              borderLeft: 'solid 1px black',
+                              borderRight: 'solid 1px black',
+                              duration: 0.15
+                        }, 0.1)
+                        tlTitle.to(bounce, {
+                              borderTop: '0',
+                              borderLeft: '0',
+                              borderRight: '0',
+                              borderBottom: '0',
+                              duration:0.2
+                        }, 0.25)
+
+                        tlTitle.to(coll, {width: 0, duration: 0.3}, .25);
+                        tlTitle.to(uncoll, {width: 'auto', duration: 0.3}, .25);
+                        tlTitle.to(flip, {transform: 'rotate(90deg)', duration: 0.2}, 0.25);
+                        // tlTitle.to(scroller, {backgroundColor: '#000', duration: 0.15}, 0.25);
+
+                        
+                        
+                        
+                        let scrollerST = gsap.to(scroller, {
+                              scrollTrigger: {
+                                    start: 'top top',
+                                    end: 'bottom bottom',
+                                    scrub: 1,
+                                    pin: true,
+                                    ease: 'power.inOut'
+                              }, transform: 'translateX(calc(40vw - 0.65rem)) translateY(-0.0rem)',
+                        });
+                                        
+                        // clicker
+                        let navSwitch = document.getElementById('title-name-text');
+                                    navSwitch.addEventListener('click', () => {tlTitle.progress() == 0 ? tlTitle.play() : tlTitle.reverse() });
+                  });
+                                          
+                  // fix calculations on resize
+                  document.addEventListener("resize", () => {
+                        updateSelectorPos();
+                  })
+                                          
+                                          
+
+                  function updateSelectorPos() {
+                        let nLink = document.getElementsByClassName('navbar-link');
+                        let flip = document.getElementById('switch');
+                        let vX = window.innerWidth / 2 - window.innerWidth / 2;
+                        let vY = flip.getBoundingClientRect().bottom - convertRemToPixels(1.3);
+                        let n1X = nLink[0].offsetLeft - 2 * convertRemToPixels(1.3);
+                        let n2X = nLink[1].offsetLeft - nLink[1].offsetWidth / 2 - 2 * convertRemToPixels(1.3);
+                        let n3X = nLink[2].offsetLeft - nLink[2].offsetWidth / 2 - 2 * convertRemToPixels(1.3);
+                        let n4X = nLink[3].getBoundingClientRect().right - nLink[3].offsetWidth - 3 * convertRemToPixels(1.3);
+                        bounce.style.left = vX;
+                        return [vX, vY, n1X, n2X, n3X, n4X];
+                  }
+
+                  function convertRemToPixels(rem) {    
+                        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+                  }
+
+                  function convertVW(vw) {
+                        return window.innerwidth * (vw / 100);
+                  }
+            </script>
       </body>
 </html>
