@@ -65,6 +65,7 @@
       font-family: AvaraBlackItalic;
       color: var(--primary-highlight);
       transform: translateY(1.5rem);
+      z-index: 96;
 }
 
 .canvas {
