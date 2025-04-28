@@ -554,31 +554,40 @@
                         // enable carousel
                         let hiddenArr = gsap.utils.toArray('.project-hidden');
                         hiddenArr.forEach((hidden, i, arr) => {
-                              // For each hidden grid
                               let left = hidden.querySelector('.button-left');
                               let right = hidden.querySelector('.button-right');
                               let carousel = hidden.querySelector('.project-carousel');
                               
-                              // Add scroll listener for opacity and arrow states
+                              // Initialize opacity and arrows
+                              requestAnimationFrame(() => {
+                                    updateOpacity(carousel);
+                                    updateArrowState(carousel, left, right);
+                              });
+
+                              // Add scroll listener
                               carousel.addEventListener('scroll', () => {
                                     requestAnimationFrame(() => {
                                           updateOpacity(carousel);
                                           updateArrowState(carousel, left, right);
                                     });
                               });
-                        
-                              // Initialize arrow states
-                              updateArrowState(carousel, left, right);
-                              
-                              // Add button listeners
+
+                              // Button listeners
                               left.addEventListener('click', () => leftArrowPress(carousel, left, right));
                               right.addEventListener('click', () => rightArrowPress(carousel, left, right));
-                              
-                              // Set up Intersection Observer for centering
+                              rightArrowPress(carousel, left, right);
+                              // Intersection Observer with improved handling
                               const observer = new IntersectionObserver((entries) => {
                                     entries.forEach(entry => {
                                           if (entry.isIntersecting) {
-                                          setTimeout(() => centerCarousel(carousel), 50);
+                                          // Use double requestAnimationFrame to ensure layout completion
+                                          requestAnimationFrame(() => {
+                                                requestAnimationFrame(() => {
+                                                      centerCarousel(carousel);
+                                                      updateOpacity(carousel);
+                                                      updateArrowState(carousel, left, right);
+                                                });
+                                          });
                                           observer.unobserve(hidden);
                                           }
                                     });
@@ -951,11 +960,14 @@
                         const boxes = carousel.querySelectorAll('.box');
                         if (!boxes.length || carousel.clientWidth === 0) return;
 
+                        // Calculate center position
                         const firstBox = boxes[0];
-                        const boxCenter = firstBox.offsetLeft + firstBox.offsetWidth/2;
-                        const scrollLeft = boxCenter - carousel.clientWidth/2;
+                        const boxWidth = firstBox.offsetWidth;
+                        const centerPos = (carousel.scrollWidth - carousel.clientWidth) / 2;
                         
-                        carousel.scrollTo({ left: scrollLeft, behavior: 'instant' });
+                        // Snap to nearest box
+                        const scrollPos = Math.round(centerPos / boxWidth) * boxWidth;
+                        carousel.scrollLeft = scrollPos;
                   }
 
 
