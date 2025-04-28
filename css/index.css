@@ -416,6 +416,7 @@ body::-webkit-scrollbar{
 
 #loading-text {
       font-family: FivoBold;
+      font-style: italic;
       color: var(--primary-highlight);
       font-size: 5rem;
 }
