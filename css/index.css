@@ -67,6 +67,7 @@
       transform: translateY(0.5rem);
       z-index: 96;
       mix-blend-mode: difference;
+      pointer-events: none;
 }
 
 .canvas {
