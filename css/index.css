@@ -8,7 +8,7 @@
 
 @font-face {
       font-family: AvaraBlackItalic;
-      src: url(../fonts/Avara-BoldItalic.otf);
+      src: url(../fonts/Avara-Bold.otf);
 }
 
 @font-face {
@@ -62,7 +62,7 @@
       /* background-color: var(--primary-highlight); */
       justify-content: center;
       align-items: center;
-      font-family: AvaraBlackItalic;
+      font-family: FivoBold;
       color: var(--primary-highlight);
       transform: translateY(0.5rem);
       z-index: 96;
@@ -414,7 +414,7 @@ body::-webkit-scrollbar{
 }
 
 #loading-text {
-      font-family: AvaraBlack;
+      font-family: FivoBold;
       color: var(--primary-highlight);
       font-size: 5rem;
 }
