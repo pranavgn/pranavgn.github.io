@@ -53,6 +53,20 @@
       grid-area: base;
 } */
 
+.main-text {
+      grid-area: 3 / 3 / 5 / 5;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      /* background-color: var(--primary-highlight); */
+      justify-content: center;
+      align-items: center;
+      font-family: AvaraBlackItalic;
+      color: var(--primary-highlight);
+      transform: translateY(1.5rem);
+}
+
 .canvas {
       grid-area: 3 / 3 / 5 / 5;
       overflow: hidden;
@@ -63,16 +77,10 @@
       align-items: center;
       width: 100%;
       height: 100%;
-      font-family: AvaraBlackItalic;
-      color: var(--primary-highlight);
 }
 
 .snap {
       scroll-snap-type: proximity;
-}
-
-.rotated {
-      margin-top:2.5rem;
 }
 
 .caps {
