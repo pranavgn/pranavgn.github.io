@@ -66,6 +66,7 @@
       color: var(--primary-highlight);
       transform: translateY(0.5rem);
       z-index: 96;
+      mix-blend-mode: difference;
 }
 
 .canvas {
