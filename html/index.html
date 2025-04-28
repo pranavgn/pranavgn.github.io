@@ -9,86 +9,577 @@
             <script src="../js/gsap.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Flip.min.js"></script>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/victor/1.1.0/victor.min.js" integrity="sha512-95CHLV2JB3ympqgc+wIbh0pTwobPqIfF31hZ97gbaTeigAUgIXJnux7uzcfB86nlzXcMM8tMoj8tdrYgTZF9vA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollToPlugin.min.js"></script>
+            <script src="../js/fitty.min.js"></script>
       </head>
       <body>
             <!-- <canvas id="body-cover-halftone-grid"></canvas> -->
 
             <!-- canvas effect overlay -->
-            <!-- <canvas id="canvas-effect-overlay" class="fw fh"></canvas> -->
-            <div id='pan-container'>
-                  <span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span><!--
-                  --><span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span><!--
-                  --><span class="infinite-repeat-overlay">UNDER CONSTRUCTION&nbsp;</span>
+            <div id="loading-page" class="fw fh">
+                  <div class="loading-page-card">
+                        <div id="loading-text">Loading</div>
+                  </div>
             </div>
 
             <!-- navbar -->
             <div id="navbar">
                   <h1 id="title-name-text" class="hover-after">
                         <span id="split-left"><!-- 
-                              --><span class="tp">P</span><!-- 
-                              --><span class="collapse hide">RANA</span><!-- 
-                              --><span class="uncollapse">G</span><!-- 
-                              --><span class="uncollapse">N</span><!-- 
+                              --><span class="pe title-text-letter">P</span><!-- 
+                              --><span class="pe title-text-letter collapse hide">RANA</span><!-- 
+                              --><span class="pe title-text-letter uncollapse">G</span><!-- 
+                              --><span class="pe title-text-letter uncollapse">N</span><!-- 
                         --></span><!-- 
                         --><span id="split-right"><!--
-                              --><span id="switch">V<!-- 
-                              --><div id="bounce"></div><!-- 
+                              --><span id="switch" class="pe title-text-letter">V<!-- 
+                              --><div id="bounce" class="pe title-text-letter"></div><!-- 
                               --></span><!-- 
-                              --><span class="collapse">&nbsp;</span><!-- 
-                              --><span class="collapse tp">N</span><!-- 
-                              --><span class="collapse hide">AIR</span><!-- 
+                              --><span class="pe collapse title-text-letter">&nbsp;</span><!-- 
+                              --><span class="pe collapse tp title-text-letter">N</span><!-- 
+                              --><span class="pe collapse hide title-text-letter">AIR</span><!-- 
                         --></span>
                   </h1>
                   <div id="link-container">
                         <div id="scroller"></div>
                         <!-- <div id="scroller-shadow"></div> -->
-                        <a class="navbar-link " id="nav-link-1" href="./game.html">work</a>
-                        <a class="navbar-link " id="nav-link-2">about</a>
-                        <a class="navbar-link " id="nav-link-3">contact</a>
-                        <a class="navbar-link " id="nav-link-4">news</a>
+                        <a class="navbar-link " id="nav-link-1" href="#work">work</a>
+                        <a class="navbar-link " id="nav-link-2" href="#about">about</a>
+                        <a class="navbar-link " id="nav-link-3" href="#contact">contact</a>
+                        <a class="navbar-link " id="nav-link-4" href="#news">news</a>
                   </div>
             </div>
 
             <!-- body content -->
-            <div class="grid-container-4-5 fw fh">
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-                  <div class="grid-item"></div>
-            </div>
-            <div class="grid-container-4-5 fw fh">
-            </div>
-            <div class="grid-container-4-5 fw fh">
-            </div>
+            <section class="grid-container fw fh snap" id="scene-1">
+                  <div class="fp-bg" id="image-fp-bg"></div>
+                  <img data-depth="0.2" class="canvas parallax-1" id="image-fp-under" src="../images/Door.png" alt="a stylized image of a man running towards a doorway"></img>
+                  <img data-depth="0.8" class="canvas parallax-1" id="image-fp-over" src="../images/Person.png"></img>
+                  <div id="ropes" class="canvas">
+                        <canvas id="canvas-1"></canvas>
+                  </div>
+                  <div class="canvas rotated" >
+                        <div class="vertical-center-container">
+                              <div class="fit-text">CRAFTING</div>
+                        </div>
+                        <div class="vertical-center-container">
+                              <div class="fit-text">VISUAL</div>
+                        </div>
+                        <div class="vertical-center-container">
+                              <div class="fit-text">EXPERIENCES</div>
+                        </div>
+                  </div>
+                  <h1 class="scroll-text">scroll</h1>
+                  <!-- <div class="area-base title-text-container" >
+                        <div id="vertical-center-container">
+                              <div class="fit-text" id="fit-text-cycle">CINEMATOGRAPHY</div>
+                        </div>
+                  </div> -->
+            </section>
+            <section class="grid-container-2 fw snap" id="work">
+                  <h1 class="work-title">
+                        <div class='letter-container'>
+                              <span class='title-letter'>W</span><span class='title-letter-post'>W</span>
+                        </div>
+                        <div class='letter-container'>
+                              <span class='title-letter'>O</span><span class='title-letter-post'>O</span>
+                        </div>
+                        <div class='letter-container'>
+                              <span class='title-letter'>R</span><span class='title-letter-post'>R</span>
+                        </div>
+                        <div class='letter-container'>
+                              <span class='title-letter'>K</span><span class='title-letter-post'>K</span>
+                        </div>
+                  </h1>
+                  <div class="projects tab-list">
+                        <div data-title="Where the Water is" class="work-card-container">
+                              <div class="work-card-title">Where the Water is</div>
+                              <div  class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Where the Water is</div>
+                                          <div class="project-type">Short Film</div>
+                                          <div class="project-studio">Cinemadison</div>
+                                          <div class="project-role">co-Director / Editor / CINEMATOGRAPHY</div>
+                                          <div class="project-date">2025</div>
+                                    </div>
+                                    <div class="project-text">
+                                          Pasts and presents come to a head as Marlie struggles to protect her sister from the dark secrets of their rural town.
+                                          <br>coming may 2025.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="Big & Small" class="work-card-container offset">
+                              <div class="work-card-title"> Big & Small</div>
+                              <div class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Big & Small</div>
+                                          <div class="project-type">Short Film</div>
+                                          <div class="project-studio">Cinemadison</div>
+                                          <div class="project-role">CINEMATOGRAPHY / COLORIST</div>
+                                          <div class="project-date">2025</div>
+                                    </div>
+                                    <div class="project-text">
+                                          Two Photographers grapple with how to share a camera despite their conflicting tastes.
+                                          <br>coming may 2025.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
 
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="Pacifica'05" class="work-card-container offset">
+                              <div class="work-card-title">Pacifica'05</div>
+                              <div  class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Pacifica'05</div>
+                                          <div class="project-type">Short Film</div>
+                                          <div class="project-studio">Cinemadison</div>
+                                          <div class="project-role">Director / Editor / CINEMATOGRAPHY</div>
+                                          <div class="project-date">2025</div>
+                                    </div>
+                                    <div class="project-text">
+                                          Philipp Rose drifts through memories and dreams of a failed romance.
+                                          <br>coming may 2025.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="Portfolio Site" class="work-card-container offset">
+                              <div class="work-card-title">Portfolio Site</div>
+                              <div class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Portfolio Site</div>
+                                          <div class="project-type">Frontend</div>
+                                          <div class="project-studio">Personal</div>
+                                          <div class="project-role">Code / Art</div>
+                                          <div class="project-date">2025</div>
+                                    </div>
+                                    <div class="project-text">
+                                          You're looking at it.<br>
+                                          Vanilla JS + GSAP Static Site.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="StudioDefunct" class="work-card-container offset">
+                              <div class="work-card-title">StudioDefunct</div>
+                              <div class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">StudioDefunct</div>
+                                          <div class="project-type">Graphic Design</div>
+                                          <div class="project-studio">Personal</div>
+                                          <div class="project-role">Graphic Design / Social Media</div>
+                                          <div class="project-date">2020/21</div>
+                                    </div>
+                                    <div class="project-text">
+                                          studiodefunct is a creative project intended to explore expression through posters. spec posters include real-life locations, museum exhibits and more.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20215.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/202113.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/202115.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/202114.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20215.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20214.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20216.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/202111.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20219.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20218.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/202112.jpg">
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="Meraki" class="work-card-container offset">
+                              <div class="work-card-title">Meraki</div>
+                              <div class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Meraki</div>
+                                          <div class="project-type">Graphic Design</div>
+                                          <div class="project-studio">High School</div>
+                                          <div class="project-role">Head Editor / Designer / Writer</div>
+                                          <div class="project-date">2019/20</div>
+                                    </div>
+                                    <div class="project-text">
+                                          Meraki was a student run publication for which I worked as head editor. Optimized primarily for digital viewing, it featured a sleek modern design with graphics and design often integrated with the writing of an article.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20203.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20204.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20205.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20206.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20207.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20211.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20212.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2021/20213.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20209.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/202010.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/202011.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20201.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2020/20202.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20191.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20197.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/201913.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/201914.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/201915.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/201916.jpg">
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div data-title="1M1B" class="work-card-container offset">
+                              <div class="work-card-title">1M1B</div>
+                              <div class="work-card">                         
+                                    <div class="project">
+                                          <div class="project-name">Poster Campaign</div>
+                                          <div class="project-type">Graphic Design</div>
+                                          <div class="project-studio">1M1B</div>
+                                          <div class="project-role">Graphic Design Intern</div>
+                                          <div class="project-date">2019</div>
+                                    </div>
+                                    <div class="project-text">
+                                          Internship at 1M1B working with both graphic design and social media. Posters were used for a various charitable causes, intended for grassroots print and distribution.
+                                    </div>
+                                    <div class="project-hidden">
+                                          <div class="button-left carousel-button">
+                                                <div><</div>
+                                          </div>
+                                          <div class="button-right carousel-button">
+                                                <div>></div>
+                                          </div>
+                                          <div class="project-carousel">
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20192.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20194.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20195.jpg">
+                                                </div>
+                                                <div class="box">
+                                                      <img loading="lazy" src="./JPEG/2019/20196.jpg">
+                                                </div>
+                                                <div class="box">
+                                          <img loading="lazy" src="./JPEG/2019/20192.jpg">
+                                    </div>
+                                    <div class="box">
+                                          <img loading="lazy" src="./JPEG/2019/20194.jpg">
+                                    </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="work-card-container offset-last">
+                              <br>
+                              <div class="work-card-last">
+                                    <div class="flex-col-center">
+                                          <!-- <div class="knob"></div> -->
+                                          <!-- <div class="last-card-text">KEEP</div>
+                                          <div class="last-card-text">ON</div> -->
+                                          <span class="last-card-text">pranav's secret files</span>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </section>
+            <section class="grid-container-3 fw fh" id="about">
+                  <div class="profile-container">
+                        <img class="profile" src="../images/profilepic.png" alt="An elegant and stylized image of yours truly">
+                  </div>
+                  <div class="about-container">
+                        <p class="about">
+                              Pranav is a creative designer, filmmaker, and programmer who thrives on storytelling across multiple platforms and media. From marketing to video production and writing, his focus is on creating stories that resonate with people, using all the tools at his disposal. 
+                        </p>
+                  </div>
+            </section>
+            <section class="grid-container-5 fw fh" id="contact">
+                  <h1 class="nothing-title">CONTACT</h1>
+                  <a class="link-0" href="mailto: pranavgn@gmail.com">email</a>
+                  <a class="link-0" href="https://www.linkedin.com/in/pranav-nair-a645382b9/">Linkedin</a>
+
+            </section>
+            <section class="grid-container-5 fw fh" id="news">
+                  <h1 class="nothing-title">NEWS</h1>
+                  <p class="nothing">Updates coming soon</p>
+            </section>
             <script type="text/javascript">
+
+                  // poorly placed constants and variables
+                  let scrollShake = 0;
+                  let isActive = true;
+                  let gravity = {x: 0, y: 3000}
+                  let activeCard;
+                  let workTitle;
+
+                  // parallax
+                  const parallaxLayers = document.getElementsByClassName('parallax-1');
+
+                  gsap.set("#image-fp-under", { xPercent: 20 });
+                  gsap.set("#image-fp-over", { xPercent: 10, yPercent: 20 });
+                  // Mousemove Parallax
+                  document.getElementById('scene-1').addEventListener('mousemove', (e) => {
+                        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                        updateParallax(x, y);
+                  });
+
+                  function updateParallax(x, y) {
+                        for (let i = 0; i < parallaxLayers.length; i++) {
+                              const layer = parallaxLayers[i];
+                              const depth = parseFloat(layer.dataset.depth);
+                              gsap.to(layer, {
+                                    x: -x * depth * 20,
+                                    y: -y * depth * 20,
+                                    duration: 0.2,
+                                    ease: "power3.out"
+                              });
+                        }
+                  }
+
+                  // Initialize transform positions based on current mouse position
+                  function initializeParallax() {
+                        const initX = (window.innerWidth / 2) / window.innerWidth - 0.5;
+                        const initY = (window.innerHeight / 2) / window.innerHeight - 0.5;
+                        updateParallax(initX, initY);
+                  }
+
+                  
                   // trigger gsap code on content load
                   document.addEventListener("DOMContentLoaded", function(event) {
+                        // loading stuff
+                        
+                        initializeParallax();
+
+                        let loadingTL = gsap.timeline();
+                        let loader = document.getElementById('loading-page');
+                        let loaderCard = document.getElementsByClassName('loading-page-card')[0];
+                        let loadingText = document.getElementById('loading-text');
+                        loadingTL.to(loaderCard, {
+                              backgroundColor: '#f3629000',
+                              duration: 0.1
+                        })
+                        loadingTL.to(loadingText, {
+                              y: '60vh',
+                              duration: 0.4,
+                              ease: 'power2.out'
+                        })
+                        loadingTL.to(loaderCard, {
+                              scale: 3,
+                              duration: 0.4,
+                              start: 0,
+                              ease: 'power2.in'
+                        })
+                        loadingTL.to(loader, {
+                              opacity: 0,
+                              duration: 0.3,
+                              start: 0.1,
+                              ease: 'power3.inOut'
+                        })
+                        loadingTL.to(loader, {
+                              pointerEvents: 'none'
+                        })
+
+                        // letter stuff
+                        let letterArray = gsap.utils.toArray('.letter-container');
+                        letterArray.forEach((letter, i, arr) => {
+                              // ping pong
+                              let easeValue = i <= arr.length / 2 ? 2 + i : Math.floor(arr.length/2) - (i - arr.length);
+                              gsap.to(letter, {
+                                    rotationX: 90,
+                                    // ease: `power${easeValue}`,
+                                    delay: 0.6,
+                                    scrollTrigger: {
+                                          scrub: 1,
+                                          trigger: '.scroll-text',
+                                          start: `top +=${easeValue}0%`,
+                                          endTrigger: '.letter-container',
+                                          end: `top +=${easeValue}0%`,
+                                    }
+                              })
+                        })
+
+                        fitty('.fit-text', {
+                              multiLine: true,
+                              observeMutations: {
+                                    subtree: true,
+                                    childList: true,
+                                    characterData: true
+                              }
+                        });
+
+                        // get rollers
+                        workTitle = document.querySelector('.work-title');
+                        let cardArray = gsap.utils.toArray('.work-card-container');
+                        
+                        cardArray.forEach((card, i, arr) => {
+                              if (i == arr.length - 1) return;
+                              card.addEventListener('click', (e) => {
+
+                                    onRollerClick(card, i);
+                              })
+                        })
+
+                        // enable rollers
+                        enableRollers();
+                        onRollerClick(cardArray[4], 4, true);
+
+                        // enable carousels
+                        let hiddenArr = gsap.utils.toArray('.project-hidden');
+                        hiddenArr.forEach((hidden, i, arr) => {
+                              // for each hidden grid
+                              let left = hidden.querySelector('.button-left');
+                              let right = hidden.querySelector('.button-right');
+                              let carousel = hidden.querySelector('.project-carousel');
+                              left.addEventListener('click', () => {
+                                    leftArrowPress(carousel, left, right);
+                              })
+                              right.addEventListener('click', () => {
+                                    rightArrowPress(carousel, left, right);
+                              })
+                        })
+                        
+
+                        // THIS IS WHEN THINGS ARE LOADED!
+                        loadingTL.play();
+
                         // gsap imports
                         gsap.registerPlugin(Flip);
                         gsap.registerPlugin(ScrollTrigger);
+                        gsap.registerPlugin(ScrollToPlugin)
+
+                        
                         
                         // find elements
-                        let flip = document.getElementById('switch')
-                        let bounce = document.getElementById('bounce')
+                        let linkContainer = document.getElementById('link-container');
+                        let flip = document.getElementById('switch');
+                        let bounce = document.getElementById('bounce');
                         let coll = document.getElementsByClassName('collapse');
                         let uncoll = document.getElementsByClassName('uncollapse');
                         let nLink = document.getElementsByClassName('navbar-link');
-                        let linkContainer = document.getElementById('link-container');
                         let scroller = document.getElementById('scroller');
                         let scrollerShadow = document.getElementById('scroller-shadow');
+
+                        // if (isPortrait()) {
+                        //       let el = document.getElementsByClassName('rotated')[0];
+                        //       el.style.transform = 'rotate(90deg)';
+                        // }
+
+                        
                         
                         // do math
                         // find the beginning of each nLink
@@ -112,27 +603,26 @@
                         
                         // start timeline
                         let tlTitle = gsap.timeline();
-                        tlTitle.pause(0);
                         tlTitle.to(bounce, {
                               width: '1.35rem', 
                               transform: `translateX(calc(-50%)) translateY(-50%)`, 
                               left: (vX + offsetX),
-                              borderBottom: 'solid 1px black',
+                              // borderBottom: 'solid 1px black',
                               borderRadius: '1.3rem',
-                              duration:0.1, 
+                              duration:0.2, 
                               ease: 'power3.out'
                         }, 0)
                         tlTitle.to(bounce, {
-                              backgroundColor: 'blue',
+                              backgroundColor: 'var(--primary-highlight)',
                               duration:0.2
                         }, 0.05)
                         tlTitle.to(nLink, {width: 0, duration:0.1, ease: 'power3.out'}, 0)
                         tlTitle.to(bounce, {
                               top: v2Y, 
                               transform: 'translateX(-50%) translateY(0)', 
-                              borderTop: 'solid 1px black',
-                              borderLeft: 'solid 1px black',
-                              borderRight: 'solid 1px black',
+                              // borderTop: 'solid 1px black',
+                              // borderLeft: 'solid 1px black',
+                              // borderRight: 'solid 1px black',
                               duration: 0.15
                         }, 0.1)
                         tlTitle.to(bounce, {
@@ -147,9 +637,24 @@
                         tlTitle.to(uncoll, {width: 'auto', duration: 0.3}, .25);
                         tlTitle.to(flip, {transform: 'rotate(90deg)', duration: 0.2}, 0.25);
                         // tlTitle.to(scroller, {backgroundColor: '#000', duration: 0.15}, 0.25);
+                        tlTitle.pause(0);
 
-                        
-                        
+                        // show/hide on scroll up/down
+                        ScrollTrigger.create({
+                              start: "top top",
+                              end: "max",
+                              // markers: true,
+                              onUpdate: (self) => {
+                                    let velocity = self.getVelocity();
+                                    // Adjust these values to your liking
+                                    if (Math.abs(velocity) > 200) {
+                                          scrollShake = gsap.utils.clamp(-3, 3, velocity * 0.01);
+                                    }
+                                    if(velocity > 250 || velocity < -1000) {
+                                          self.direction === -1 ? tlTitle.reverse() : tlTitle.play()
+                                    }
+                              }
+                        });
                         
                         let scrollerST = gsap.to(scroller, {
                               scrollTrigger: {
@@ -166,11 +671,688 @@
                                     navSwitch.addEventListener('click', () => {tlTitle.progress() == 0 ? tlTitle.play() : tlTitle.reverse() });
                   });
                                           
-                  // fix calculations on resize
+                  // #TODO fix calculations on resize
                   document.addEventListener("resize", () => {
                         updateSelectorPos();
                   })
+            
+
+                  Math.lerp = (first, second, percentage) => {
+                      return first + (second - first) * percentage;
+                  };
+
+                  function enableMouseEnter(e) {
+                        let card = e.target;
+                        gsap.killTweensOf(card);
+                        gsap.to(card, {
+                              x: 10,
+                              y: '-1rem',
+                              duration: 0.1,
+                              ease: 'Power2.out'
+                        })
+                  }
+
+                  function enableMouseLeave(e) {
+                        let card = e.target;
+                        gsap.killTweensOf(card);
+                        gsap.to(card, {
+                              x: 0,
+                              y: 0,
+                              duration: 0.1,
+                              ease: 'Power2.out'
+                        })
+                  }
+
+                  // rollers
+                  function enableRollers() {
+                        let workCards = gsap.utils.toArray('.work-card-container');
+                        workCards.forEach((card, i, arr) => {
+                              // gsap.set(card, {marginTop: 'calc(-25vh - 3rem)'});
+                              if (i == arr.length - 1) return;
+                              card.addEventListener('mouseenter', enableMouseEnter);
+                              card.addEventListener('mouseleave', enableMouseLeave);
+                        })
+                  }
+                  
+                  function enableRoller(card) {
+                        card.addEventListener('mouseenter', enableMouseEnter);
+                        card.addEventListener('mouseleave', enableMouseLeave);
+                  }
+
+                  function disableRollers() {
+                        let workCards = gsap.utils.toArray('.work-card-container');
+                        workCards.forEach((card, i, arr) => {
+                              if (i == arr.length - 1) return;
+                              card.removeEventListener('mouseenter', enableMouseEnter);
+                              card.removeEventListener('mouseleave', enableMouseLeave);
+                        })
+
+                  }
+                  
+                  function disableRoller(card) {
+                        card.removeEventListener('mouseenter', enableMouseEnter);
+                        card.removeEventListener('mouseleave', enableMouseLeave);
+                  }
+                  
+                  function onRollerClick(card, i, first = false) {
+                        if (activeCard == card) return;
+
+                        if (activeCard) {
+                              resetCard(activeCard);
+                        }
+
+                        
+                        // Add close button if not already there
+                        let title = card.querySelector('.work-card-title');
+                        if (!title.querySelector('.work-card-title-close')) {
+                              let close = document.createElement('a');
+                              close.innerText = 'X';
+                              close.classList.add('work-card-title-close');
+                              close.style.marginLeft = '1rem';
+                              close.style.cursor = 'pointer';
+                              close.addEventListener('click', (e) => {
+                                    e.stopPropagation(); // prevent bubbling
+                                    resetCard(card);
+                              });
+                              title.appendChild(close);
+                        }                        
+                        
+                        // Disable hover animations on the new active card
+                        disableRoller(card);
+
+                        gsap.to(card.querySelector('.project-hidden'), {
+                                    duration: 0.4,
+                                    gridTemplateRows: '1fr'
+                        });
+
+                        // Animate the clicked card
+                        let offsetVal = convertRemToPixels(3.5 * i) + convertVH(21);
+                        gsap.to(card, {
+                              x: 10,
+                              y: -offsetVal,
+                              zIndex: 96,
+                              cursor: 'default',
+                              duration: 0.4,
+                              ease: "power2.out",
+                        });
+                        gsap.to(card.querySelector('.work-card-title'), {
+                              x:10,
+                              cursor: 'default',
+                              duration: 0.2
+                        })
+                        gsap.to(card.querySelector('.work-card'), {
+                              duration: 0.2,
+                              cursor: 'default',
+                              skewX: 0
+                        })
+
+                        gsap.to(workTitle, {
+                              marginBottom: '20vh',
+                              marginLeft: '3rem',
+                              duration: 0.3,
+                              ease: "power2.out"
+                        });
+
+                        activeCard = card;
+                        console.log('new active: ', activeCard);
+                  }
+
+                  function resetCard(card) {
+                        console.log('reset: ', card);
+                        if (!card) return;
+
+                        gsap.to(card, {
+                              x: 0,
+                              y: 0,
+                              zIndex: 95,
+                              duration: 0.4,
+                              cursor: 'pointer',
+                              ease: "power2.out",
+                              onComplete: () => {
+                                    let close = card.querySelector('.work-card-title-close');
+                                    if (close) close.remove();
+                                    enableRoller(card);
+                                    activeCard = null;
+                              }
+                        });
+
+                        gsap.to(card.querySelector('.project-hidden'), {
+                                    duration: 0.4,
+                                    gridTemplateRows: '0px'
+                        });
+
+                        gsap.to(card.querySelector('.work-card-title'), {
+                              x:0,
+                              cursor: 'pointer',
+                              duration: 0.2
+                        })
+                        gsap.to(card.querySelector('.work-card'), {
+                              duration: 0.2,
+                              cursor: 'pointer',
+                              skewX: 5
+                        })
+
+                        gsap.to(workTitle, {
+                              marginBottom: '0vh',
+                              duration: 0.3,
+                              ease: "power2.out"
+                        });
+                  }
+
+                  // carousel controls
+
+                  function updateArrowState(carousel, leftArrow, rightArrow) {
+                        const scrollLeft = carousel.scrollLeft;
+                        const scrollWidth = carousel.scrollWidth;
+                        const clientWidth = carousel.clientWidth;
+
+                        if (scrollLeft <= 0) {
+                              leftArrow.classList.add('disabled');
+                        } else {
+                              leftArrow.classList.remove('disabled');
+                        }
+
+                        if (scrollLeft + clientWidth >= scrollWidth - 1) {
+                              rightArrow.classList.add('disabled');
+                        } else {
+                              rightArrow.classList.remove('disabled');
+                        }
+                  }
+
+                  function leftArrowPress(carousel, leftArrow, rightArrow) {
+                        const boxes = carousel.querySelectorAll('.box');
+                        if (boxes.length === 0) return;
+
+                        // Calculate scroll amount including margins
+                        const firstBox = boxes[0];
+                        const boxStyle = getComputedStyle(firstBox);
+                        const marginLeft = parseFloat(boxStyle.marginLeft) || 0;
+                        const marginRight = parseFloat(boxStyle.marginRight) || 0;
+                        const scrollAmount = firstBox.offsetWidth + marginLeft + marginRight;
+
+                        carousel.scrollBy({
+                              left: -scrollAmount,
+                              behavior: 'smooth'
+                        });
+
+                        // Update arrow states after scrolling
+                        setTimeout(() => updateArrowState(carousel, leftArrow, rightArrow), 300);
+                  }
+
+                  function rightArrowPress(carousel, leftArrow, rightArrow) {
+                        const boxes = carousel.querySelectorAll('.box');
+                        if (boxes.length === 0) return;
+
+                        // Calculate scroll amount including margins
+                        const firstBox = boxes[0];
+                        const boxStyle = getComputedStyle(firstBox);
+                        const marginLeft = parseFloat(boxStyle.marginLeft) || 0;
+                        const marginRight = parseFloat(boxStyle.marginRight) || 0;
+                        const scrollAmount = firstBox.offsetWidth + marginLeft + marginRight;
+
+                        carousel.scrollBy({
+                              left: scrollAmount,
+                              behavior: 'smooth'
+                        });
+
+                        // Update arrow states after scrolling
+                        setTimeout(() => updateArrowState(carousel, leftArrow, rightArrow), 300);
+                  }
+
+
+
+                  // canvas 1 code
+                  class Vector2 {
+                        static zero() {
+                        return { x: 0, y: 0 };
+                        }
+
+                        static sub(a, b) {
+                        return { x: a.x - b.x, y: a.y - b.y };
+                        }
+
+                        static add(a, b) {
+                        return { x: a.x + b.x, y: a.y + b.y };
+                        }
+
+                        static mult(a, b) {
+                        return { x: a.x * b.x, y: a.y * b.y };
+                        }
+
+                        static scale(v, scaleFactor) {
+                        return { x: v.x * scaleFactor, y: v.y * scaleFactor };
+                        }
+
+                        static mag(v) {
+                        return Math.sqrt(v.x * v.x + v.y * v.y);
+                        }
+
+                        static normalized(v) {
+                        const mag = Vector2.mag(v);
+
+                        if (mag === 0) {
+                              return Vector2.zero();
+                        }
+                        return { x: v.x / mag, y: v.y / mag };
+                        }
+                  }
+
+                  class App {
+                        constructor(
+                              window,
+                              canvas,
+                              context,
+                              updateHandler,
+                              drawHandler,
+                              frameRate = 60
+                        ) {
+                              this._window = window;
+                              this._canvas = canvas;
+                              this._context = context;
+                              this._updateHandler = updateHandler;
+                              this._drawHandler = drawHandler;
+                              this._frameRate = frameRate;
+                              this._lastTime = 0;
+                              this._currentTime = 0;
+                              this._deltaTime = 0;
+                              this._interval = 0;
+                              this.onMouseMoveHandler = (x, y) => {};
+                              this.onMouseDownHandler = (x, y) => {};
+                              this.start = this.start.bind(this);
+                              this._onMouseEventHandlerWrapper = this._onMouseEventHandlerWrapper.bind(
+                                    this
+                        );
+                              this._onRequestAnimationFrame = this._onRequestAnimationFrame.bind(this);
+                              this.fitToContainer(canvas);
+                        }
+
+                        start() {
+                              this._lastTime = new Date().getTime();
+                              this._currentTime = 0;
+                              this._deltaTime = 0;
+                              this._interval = 1000 / this._frameRate;
+
+                              this._canvas.addEventListener(
+                                    "mousemove",
+                                    e => {
+                                    this._onMouseEventHandlerWrapper(e, this.onMouseMoveHandler);
+                                    },
+                                    false
+                              );
+
+                              this._canvas.addEventListener("mousedown", e => {
+                                    this._onMouseEventHandlerWrapper(e, this.onMouseDownHandler);
+                                    }, false
+                              );
+
+                              this._onRequestAnimationFrame();
+                        }
+
+                        _onMouseEventHandlerWrapper(e, callback) {
+                              let element = this._canvas;
+                              let offsetX = 0;
+                              let offsetY = 0;
+
+                              if (element.offsetParent) {
+                                    do {
+                                    offsetX += element.offsetLeft;
+                                    offsetY += element.offsetTop;
+                                    } while ((element = element.offsetParent));
+                              }
+
+                              const x = e.pageX - offsetX;
+                              const y = e.pageY - offsetY;
+
+                              callback(x, y);
+                        }
+
+                        _onRequestAnimationFrame() {
+                              this._window.requestAnimationFrame(this._onRequestAnimationFrame);
+
+                              this._currentTime = new Date().getTime();
+                              this._deltaTime = this._currentTime - this._lastTime;
+
+                              if (this._deltaTime > this._interval) {
+                              
+                                    //delta time in seconds
+                                    const dts = this._deltaTime * 0.001;
+                                    
+                                    this._updateHandler(dts);
+
+                                    this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
+                                    this._drawHandler(this._canvas, this._context, dts);
+
+                                    this._lastTime = this._currentTime - this._deltaTime % this._interval;
+                              }
+                        }
+
+                        fitToContainer(canvas) {
+                              let ropeContainer = document.getElementById('ropes');
+                              // then set the internal size to match
+                              canvas.width  = ropeContainer.offsetWidth;
+                              canvas.height = ropeContainer.offsetHeight;
+                        }
+                  }
+
+
+                  //each rope part is one of these
+                  //uses a high precison varient of Störmer–Verlet integration
+                  //to keep the simulation consistant otherwise it would "explode"!
+                  class RopePoint {
+                  //integrates motion equations per node without taking into account relationship
+                  //with other nodes...
+                        static integrate(point, gravity, dt, previousFrameDt) {
+                              point.velocity = Vector2.sub(point.pos, point.oldPos);
+                              point.oldPos = { ...point.pos };
+
+                              //drastically improves stability
+                              let timeCorrection = previousFrameDt != 0.0 ? dt / previousFrameDt : 0.0;
+
+                              let accel = Vector2.add(gravity, { x: 0, y: point.mass });
+
+                              const velCoef = timeCorrection * point.damping;
+                              const accelCoef = Math.pow(dt, 2);
+
+                              point.pos.x += point.velocity.x * velCoef + accel.x * accelCoef;
+                              point.pos.y += point.velocity.y * velCoef + accel.y * accelCoef;
+                        }
+
+                  //apply constraints related to other nodes next to it
+                  //(keeps each node within distance)
+                        static constrain(point) {
+                              if (point.next) {
+                                    const delta = Vector2.sub(point.next.pos, point.pos);
+                                    const len = Vector2.mag(delta);
+                                    const diff = len - point.distanceToNextPoint;
+                                    const normal = Vector2.normalized(delta);
+
+                                    const threshold = 0.05;
+                                    if (Math.abs(diff) < threshold) return;
+
+                                    if (!point.isFixed) {
+                                    point.pos.x += normal.x * diff * 0.25;
+                                    point.pos.y += normal.y * diff * 0.25;
+                                    }
+
+                                    if (!point.next.isFixed) {
+                                    point.next.pos.x -= normal.x * diff * 0.25;
+                                    point.next.pos.y -= normal.y * diff * 0.25;
+                                    }
+                              }
+                              if (point.prev) {
+                                    const delta = Vector2.sub(point.prev.pos, point.pos);
+                                    const len = Vector2.mag(delta);
+                                    const diff = len - point.distanceToNextPoint;
+                                    const normal = Vector2.normalized(delta);
+
+                                    const threshold = 0.05;
+                                    if (Math.abs(diff) < threshold) return;
+
+                                    if (!point.isFixed) {
+                                    point.pos.x += normal.x * diff * 0.25;
+                                    point.pos.y += normal.y * diff * 0.25;
+                                    }
+
+                                    if (!point.prev.isFixed) {
+                                    point.prev.pos.x -= normal.x * diff * 0.25;
+                                    point.prev.pos.y -= normal.y * diff * 0.25;
+                                    }
+                              }
+                        }
+
+                        constructor(initialPos, distanceToNextPoint) {
+                              this.pos = initialPos;
+                              this.distanceToNextPoint = distanceToNextPoint;
+                              this.isFixed = false;
+                              this.oldPos = { ...initialPos };
+                              this.velocity = Vector2.zero();
+                              this.mass = 1.0;
+                              this.damping = 1.0;
+                              this.prev = null;
+                              this.next = null;
+                        }
+                  }
+
+                  //manages a collection of rope points and executes
+                  //the integration
+                  class Rope {
+                        //generate an array of points suitable for a dynamic
+                        //rope contour
+                        static generate(start, end, resolution, mass, damping) {
+                              const delta = Vector2.sub(end, start);
+                              const len = Vector2.mag(delta);
+
+                              let points = [];
+                              const pointsLen = len / resolution;
+
+                              for (let i = 0; i < pointsLen; i++) {
+                                    const percentage = i / (pointsLen - 1);
+
+                                    const lerpX = Math.lerp(start.x, end.x, percentage);
+                                    const lerpY = Math.lerp(start.y, end.y, percentage);
+
+                                    points[i] = new RopePoint({ x: lerpX, y: lerpY }, resolution + 10);
+                                    points[i].mass = mass;
+                                    points[i].damping = Math.lerp(damping, 0.99, Math.random());
+                                    ;
+                              }
+
+                              //Link nodes into a doubly linked list
+                              for (let i = 0; i < pointsLen; i++) {
+                                    const prev = i != 0 ? points[i - 1] : null;
+                                    const curr = points[i];
+                                    const next = i != pointsLen - 1 ? points[i + 1] : null;
+
+                                    curr.prev = prev;
+                                    curr.next = next;
+                              }
+
+                              // points[0].isFixed = points[points.length - 1].isFixed = true;
+                              points[0].isFixed = true;
+
+                              return points;
+                        }
+
+                  constructor(points, solverIterations) {
+                        this._points = points;
+                        this.update = this.update.bind(this);
+                        this._prevDelta = 0;
+                        this._solverIterations = solverIterations;
+
+                        this.getPoint = this.getPoint.bind(this);
+                  }
+
+                  getPoint(index) {
+                        return this._points[index];
+                  }
+
+                  update(gravity, dt) {
+                        for (let i = 1; i < this._points.length; i++) {
+                              let point = this._points[i];
+
+                              let accel = { ...gravity };
+
+                              RopePoint.integrate(point, accel, dt, this._prevDelta);
+                        }
+
+                        for (let iteration = 0; iteration < this._solverIterations; iteration++)
+                                    for (let i = 1; i < this._points.length-1; i++) {
+                                    let point = this._points[i];
+                                    RopePoint.constrain(point);
+                              }
+
+                        this._prevDelta = dt;
+                  }
+                  }
+
+                  //APP SETUP!
+
+                  const canvas = document.getElementById("canvas-1");
+                  const context = canvas.getContext("2d");
+
+                  // get colors
+                  let gradStart = getComputedStyle(document.body).getPropertyValue('--primary-highlight');
+                  let gradEnd = getComputedStyle(document.body).getPropertyValue('--gradient-2');
+
+                  var gradient = context.createLinearGradient(0, 0, 0, 100);
+                  gradient.addColorStop("0", gradStart);
+                  gradient.addColorStop("1.0", gradStart);
+
+                  const args = {
+                        start: { x: 0, y: 10 },
+                        end: { x: canvas.width - 100, y: canvas.height / 2 },
+                        resolution: 20,
+                        mass: 0.88,
+                        damping: 0.98,
+                        gravity: gravity,
+                        solverIterations: 150,
+                        ropeColour: gradient,
+                        ropeSize: 1
+                  };
+
+                  // const points = Rope.generate(
+                  //       args.start,
+                  //       args.end,
+                  //       args.resolution,
+                  //       args.mass,
+                  //       args.damping
+                  // );
+
+                  // let rope = new Rope(points, args.solverIterations);
+                  const ropeSpacing = 10;
+                  let ropes = []
+                  let ropeCount = Math.floor((window.innerWidth - 100) / ropeSpacing);
+                  for (let i = 0; i < ropeCount; i++) {
+                        const x = i * ropeSpacing + ropeSpacing / 2;
+
+                        const start = { x, y: 10 };
+                        let titleTexts = document.getElementsByClassName('vertical-center-container')
+                        let offsetY = titleTexts[titleTexts.length - 1].getBoundingClientRect().bottom;
+                        const end = { x, y: offsetY };
+
+                        const points = Rope.generate(start, end , args.resolution, args.mass, args.damping);
+                        const rope = new Rope(points, args.solverIterations);
+
+                        ropes.push(rope);
+                  }
+
+                  const tick = dt => {
+                        // rope.update(args.gravity, dt);
+                        if (!canvas.checkVisibility()) return;
+                        for (let rope of ropes) {
+                              const maxDt = 0.033; // 33ms in seconds
+                              dt = Math.min(dt, maxDt);
+                              rope.update(args.gravity, dt);
+                              for (let point of rope._points) {
+                                    if (point.isFixed) continue;
+                                    for (let i = 1; i < rope._points.length; i++) {
+                                          const point = rope._points[i];
                                           
+                                          if (!point.isFixed ) {
+                                                const indexRatio = i / (rope._points.length - 1); // 0 at top, 1 at bottom
+                                                const intensity = Math.pow(indexRatio, 1.5); // tweakable curve, more dramatic toward bottom
+                                                const noise = (Math.random() - 0.5) * 0.5;
+                                                point.pos.x += (scrollShake) * 0.5 * intensity * noise;
+                                                point.pos.y += scrollShake * intensity * noise;
+                                          }
+                                    }
+                                    
+                                          if (mouse.isInside) {
+                                                const dx = point.pos.x - mouse.x;
+                                                const dy = point.pos.y - mouse.y;
+                                                const distSq = dx * dx + dy * dy;
+            
+                                                if (distSq < mouseRadius * mouseRadius) {
+                                                      // Option 1: Pull toward mouse
+                                                      // point.pos.x += dx * 0.08;
+                                                      // point.pos.y += dy * 0.08;
+            
+                                                      // Option 2: Push away from mouse
+                                                      // point.pos.x += dx * 0.1;
+                                                      point.pos.x += dx * Math.lerp(0.15, 0, distSq / (mouseRadius * mouseRadius));
+                                                      // point.pos.y += dy * 0.1;
+                                                      point.pos.y += dy * Math.lerp(0.15, 0, distSq / (mouseRadius * mouseRadius));
+                                                }
+                                          }
+                                    }
+                        }
+
+                        scrollShake *= 0.9
+                  };
+
+                  const drawRopePoints = (context, points, colour, width) => {
+                        for (i = 0; i < points.length; i++) {
+                              let p = points[i];
+
+                              const prev = i > 0 ? points[i - 1] : null;
+
+                              if (prev) {
+                                    context.beginPath();
+                                    context.moveTo(prev.pos.x, prev.pos.y);
+                                    context.lineTo(p.pos.x, p.pos.y);
+                                    context.lineWidth = width;
+                                    context.strokeStyle = colour;
+                                    context.stroke();
+                              }
+                        }
+                  };
+
+                  //render a rope using the verlet points
+                  const draw = (canvas, context, dt) => {
+                        // drawRopePoints(context, points, args.ropeColour, args.ropeSize);
+                        // draw image elements
+
+                        // draw ropes
+                        for (let rope of ropes) {
+                              drawRopePoints(context, rope._points, args.ropeColour, args.ropeSize);
+                        }
+                  };
+
+                  let mouseRadius = 50;
+                  let mouse = {x: 0, y: 0, isInside: false};
+
+                  canvas.addEventListener("mousemove", e => {
+                        const rect = canvas.getBoundingClientRect();
+                        mouse.x = e.clientX - rect.left;
+                        mouse.y = e.clientY - rect.top;
+                  });
+
+                  canvas.addEventListener("mouseenter", () => {
+                        mouse.isInside = true;
+                  });
+
+                  canvas.addEventListener("mouseleave", () => {
+                        mouse.isInside = false;
+                  });
+
+                  window.addEventListener("deviceorientation", (event) => {
+                        const tiltX = event.gamma; // Left-right, -90 to 90
+                        const tiltY = event.beta;  // Front-back, -180 to 180
+
+                        // Scale these to get a good feel; tweak gravityStrength as needed
+                        const gravityStrength = 3000;
+
+                        gravity.x = (tiltX / 90) * gravityStrength;
+                        gravity.y = (tiltY / 90) * gravityStrength;
+                  });
+
+
+                  // const onMouseMove = (x, y) => {
+                  //       let point = rope.getPoint(5);
+                  //       point.pos.x = x;
+                  //       point.pos.y = y;
+                  // };
+
+                  const app = new App(window, canvas, context, tick, draw, 60);
+
+                  // app.onMouseMoveHandler = onMouseMove;
+                  app.start();
+
+                  const words = ['CINEMATOGRAPHY', 'GRAPHIC DESIGN', 'WEB DEVELOPMENT', 'SHORT FILMS', ]
+                  // let textCycleInterval = setInterval(() => {
+                  //       let el = document.getElementById('fit-text-cycle');
+                  //       el.innerText = words[Math.floor(Math.random() * 4)]
+                  // }, 5000)
                                           
 
                   function updateSelectorPos() {
@@ -191,8 +1373,23 @@
                   }
 
                   function convertVW(vw) {
-                        return window.innerwidth * (vw / 100);
+                        return window.innerWidth * (vw / 100);
                   }
+
+                  function convertVH(vh) {
+                        return window.innerHeight * (vh / 100);
+                  }
+
+                  // 0 for landscape, 1 for portrait
+                  function isPortrait() {
+                        // if portrait
+                        if(window.innerHeight > window.innerWidth){
+                              return 1;
+                        } else {
+                              return 0;
+                        }
+                  }
+
             </script>
       </body>
 </html>
