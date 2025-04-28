@@ -528,13 +528,13 @@
                         })
 
                         let fitties = fitty('.fit-text', {
-                              multiLine: true,
                               observeMutations: {
                                     subtree: true,
                                     childList: true,
                                     characterData: true
                               }
                         });
+
                         fitties.fit({sync: true});
 
                         // get rollers
