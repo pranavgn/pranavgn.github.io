@@ -836,11 +836,9 @@
                         });
 
                         activeCard = card;
-                        console.log('new active: ', activeCard);
                   }
 
                   function resetCard(card) {
-                        console.log('reset: ', card);
                         if (!card) return;
 
                         gsap.to(card, {
@@ -1273,10 +1271,10 @@
                         start: { x: 0, y: 10 },
                         end: { x: canvas.width - 100, y: canvas.height / 2 },
                         resolution: 20,
-                        mass: 0.88,
-                        damping: 0.98,
+                        mass: 1.5,
+                        damping: 0.95,
                         gravity: gravity,
-                        solverIterations: 150,
+                        solverIterations: 100,
                         ropeColour: gradient,
                         ropeSize: 1
                   };
@@ -1340,9 +1338,9 @@
             
                                                       // Option 2: Push away from mouse
                                                       // point.pos.x += dx * 0.1;
-                                                      point.pos.x += dx * Math.lerp(0.15, 0, distSq / (mouseRadius * mouseRadius));
+                                                      point.pos.x += dx * Math.lerp(0.5, 0, distSq / (mouseRadius * mouseRadius));
                                                       // point.pos.y += dy * 0.1;
-                                                      point.pos.y += dy * Math.lerp(0.15, 0, distSq / (mouseRadius * mouseRadius));
+                                                      point.pos.y += dy * Math.lerp(0.5, 0, distSq / (mouseRadius * mouseRadius));
                                                 }
                                           }
                                     }
@@ -1396,16 +1394,16 @@
                         mouse.isInside = false;
                   });
 
-                  window.addEventListener("deviceorientation", (event) => {
-                        const tiltX = event.gamma; // Left-right, -90 to 90
-                        const tiltY = event.beta;  // Front-back, -180 to 180
-                        // console.log(triggered)
-                        // Scale these to get a good feel; tweak gravityStrength as needed
-                        const gravityStrength = 3000;
+                  // window.addEventListener("deviceorientation", (event) => {
+                  //       const tiltX = event.gamma; // Left-right, -90 to 90
+                  //       const tiltY = event.beta;  // Front-back, -180 to 180
+                  //       console.log('triggered')
+                  //       // Scale these to get a good feel; tweak gravityStrength as needed
+                  //       const gravityStrength = 3000;
 
-                        gravity.x = (tiltX / 90) * gravityStrength;
-                        gravity.y = (tiltY / 90) * gravityStrength;
-                  });
+                  //       gravity.x = (tiltX / 90) * gravityStrength;
+                  //       gravity.y = (tiltY / 90) * gravityStrength;
+                  // });
 
 
                   // const onMouseMove = (x, y) => {
