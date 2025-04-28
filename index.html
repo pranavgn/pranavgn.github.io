@@ -527,7 +527,7 @@
                               })
                         })
 
-                        fitty('.fit-text', {
+                        let fitties = fitty('.fit-text', {
                               multiLine: true,
                               observeMutations: {
                                     subtree: true,
@@ -535,6 +535,7 @@
                                     characterData: true
                               }
                         });
+                        fitties.fit({sync: true});
 
                         // get rollers
                         workTitle = document.querySelector('.work-title');
@@ -552,20 +553,40 @@
                         enableRollers();
                         onRollerClick(cardArray[4], 4, true);
 
-                        // enable carousels
+                        // enable carousel
                         let hiddenArr = gsap.utils.toArray('.project-hidden');
                         hiddenArr.forEach((hidden, i, arr) => {
-                              // for each hidden grid
+                              // For each hidden grid
                               let left = hidden.querySelector('.button-left');
                               let right = hidden.querySelector('.button-right');
                               let carousel = hidden.querySelector('.project-carousel');
-                              left.addEventListener('click', () => {
-                                    leftArrowPress(carousel, left, right);
-                              })
-                              right.addEventListener('click', () => {
-                                    rightArrowPress(carousel, left, right);
-                              })
-                        })
+                              
+                              // Add scroll listener for opacity and arrow states
+                              carousel.addEventListener('scroll', () => {
+                                    requestAnimationFrame(() => {
+                                          updateOpacity(carousel);
+                                          updateArrowState(carousel, left, right);
+                                    });
+                              });
+                        
+                              // Initialize arrow states
+                              updateArrowState(carousel, left, right);
+                              
+                              // Add button listeners
+                              left.addEventListener('click', () => leftArrowPress(carousel, left, right));
+                              right.addEventListener('click', () => rightArrowPress(carousel, left, right));
+                              
+                              // Set up Intersection Observer for centering
+                              const observer = new IntersectionObserver((entries) => {
+                                    entries.forEach(entry => {
+                                          if (entry.isIntersecting) {
+                                          setTimeout(() => centerCarousel(carousel), 50);
+                                          observer.unobserve(hidden);
+                                          }
+                                    });
+                              }, { threshold: 0.1 });
+                              observer.observe(hidden);
+                        });
                         
 
                         // THIS IS WHEN THINGS ARE LOADED!
@@ -911,6 +932,32 @@
 
                         // Update arrow states after scrolling
                         setTimeout(() => updateArrowState(carousel, leftArrow, rightArrow), 300);
+                  }
+
+                  function updateOpacity(carousel) {
+                        const boxes = carousel.querySelectorAll('.box');
+                        const carouselRect = carousel.getBoundingClientRect();
+                        const carouselCenterX = carouselRect.left + carouselRect.width/2;
+
+                        boxes.forEach(box => {
+                              const boxRect = box.getBoundingClientRect();
+                              const boxCenterX = boxRect.left + boxRect.width/2;
+                              const distance = Math.abs(boxCenterX - carouselCenterX);
+                              const maxDistance = carouselRect.width/2;
+                              const opacity = Math.max(0.3, 1 - (distance / maxDistance));
+                              box.style.opacity = opacity;
+                        });
+                  }
+
+                  function centerCarousel(carousel) {
+                        const boxes = carousel.querySelectorAll('.box');
+                        if (!boxes.length || carousel.clientWidth === 0) return;
+
+                        const firstBox = boxes[0];
+                        const boxCenter = firstBox.offsetLeft + firstBox.offsetWidth/2;
+                        const scrollLeft = boxCenter - carousel.clientWidth/2;
+                        
+                        carousel.scrollTo({ left: scrollLeft, behavior: 'instant' });
                   }
 
 
