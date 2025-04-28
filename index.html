@@ -527,15 +527,11 @@
                               })
                         })
 
-                        let fitties = fitty('.fit-text', {
-                              observeMutations: {
-                                    subtree: true,
-                                    childList: true,
-                                    characterData: true
-                              }
-                        });
+                        let fitties = fitty('.fit-text');
 
-                        fitties.fit({sync: true});
+                        for(let i = 0; i < 3; i++) {
+                              fitties[i].fit();
+                        }
 
                         // get rollers
                         workTitle = document.querySelector('.work-title');
