@@ -678,10 +678,17 @@ body::-webkit-scrollbar{
       -ms-overflow-style: none;
 }
 
+.carousel-track {
+      display: flex;
+      will-change: transform;
+      transition: transform 0.3s ease;
+}
+
 .left-hide {
       position: absolute;
       left: 0;
       width: 30%;
+      z-index: 1;
       background: linear-gradient(270deg,rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);      
 }
 
@@ -689,9 +696,8 @@ body::-webkit-scrollbar{
       position: absolute;
       right: 0;
       width: 30%;
-      background: linear-gradient(90deg,rgba(255, 255, 255.box {
-            transition: opacity 0.3s ease;
-        }.box, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      z-index: 1;
+      background: linear-gradient(270deg,rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);      
 }
 
 .project-carousel::-webkit-scrollbar {
