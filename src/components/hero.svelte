@@ -35,9 +35,10 @@
     
     await new Promise(resolve => requestAnimationFrame(resolve));
     
-    // 1. Initial Setup
+    // 1. Initial Setup 
+    // This acts as the "source of truth" before the timeline takes over
     gsap.set(headerElement, { height: '100vh' });
-    gsap.set(imageElement, { height: '100%' });
+    gsap.set(imageElement, { height: '100%', marginBottom: '0px' }); // Ensure margins are reset here
     gsap.set(navElement, { autoAlpha: 0, y: 10 });
     gsap.set(scrollIndicator, { autoAlpha: 1, y: 0 }); 
 
@@ -52,19 +53,29 @@
       }
     });
 
-    // 3. Animations
-    timeline.to(headerElement, {
-      height: '15vh',
-      ease: "none"
-    }, 0);
-
-    timeline.to(imageElement, {
-      height: '8vh',
-      marginBottom: '10px',
-      ease: "none"
-    }, 0);
+    // 3. Animations - Add immediateRender: false
     
-    // Fade OUT scroll indicator immediately on scroll
+    timeline.fromTo(headerElement, 
+      { height: '100vh' }, 
+      { 
+        height: '15vh', 
+        ease: "none",
+        immediateRender: false // <--- THE FIX
+      }, 
+      0
+    );
+
+    timeline.fromTo(imageElement, 
+      { height: '100%', marginBottom: '0px' }, 
+      { 
+        height: '8vh', 
+        marginBottom: '10px', 
+        ease: "none",
+        immediateRender: false // <--- THE FIX
+      }, 
+      0
+    );
+    
     timeline.to(scrollIndicator, {
       autoAlpha: 0,
       y: -20, 
@@ -78,9 +89,44 @@
       ease: "none"
     }, 0.2);
 
-    // 4. Noise Generator
+    // 4. Force a refresh to ensure start/end positions are calculated 
+    // correctly after the browser handles the #hash jump
+    ScrollTrigger.refresh();
+    
     setupNoiseAnimation();
   });
+
+  async function smoothScrollTo(id, e) {
+    e.preventDefault(); // Stop the browser from jumping instantly
+    
+    const { gsap } = await import('gsap');
+    const { ScrollToPlugin } = await import('gsap/ScrollToPlugin');
+    gsap.registerPlugin(ScrollToPlugin);
+
+    gsap.to(window, {
+      duration: 1.2,
+      scrollTo: {
+        y: id,
+        autoKill: false
+      },
+      ease: "power4.inOut"
+    });
+  }
+
+  async function scrollToSection(id) {
+    const { gsap } = await import('gsap');
+    const { ScrollToPlugin } = await import('gsap/ScrollToPlugin');
+    gsap.registerPlugin(ScrollToPlugin);
+
+    gsap.to(window, {
+      duration: 1.5,          // Slower duration for a cinematic feel
+      scrollTo: {
+        y: id,
+        autoKill: false       // Allows the user to interrupt if they grab the scrollbar
+      },
+      ease: "power4.inOut"    // The smoothest ease for long-distance scrolling
+    });
+  }
 
   function setupNoiseAnimation() {
     if (!noiseCanvas) return;
@@ -169,9 +215,9 @@
   />
   
   <nav class="nav-links" bind:this={navElement}>
-    <a href="#work">WORK</a>
-    <a href="#about">ABOUT</a>
-    <a href="#contact">CONTACT</a>
+    <a href="/" on:click|preventDefault={() => scrollToSection("#work")}>WORK</a>
+    <a href="/" on:click|preventDefault={() => scrollToSection("#about")}>ABOUT</a>
+    <a href="/" on:click|preventDefault={() => scrollToSection("#contact")}>CONTACT</a>
   </nav>
 
   <div class="scroll-indicator" bind:this={scrollIndicator}>
