@@ -255,7 +255,7 @@
         on:mouseleave={() => isHoveringTrigger = false}
         on:click={() => isPlaying = true}
       >
-        <img src="/2025/20251.png" alt="Play Video" class="trigger-img" />
+        <img src="/2025/20251.webp" alt="Play Video" class="trigger-img" />
         
         <div class="play-button-overlay">
             <svg viewBox="0 0 60 40" class="play-svg" preserveAspectRatio="none" style="mix-blend-mode: exclusion;">

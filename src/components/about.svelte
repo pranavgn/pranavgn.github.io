@@ -34,10 +34,10 @@
     tl.to(word1, { height: '28vh', ease: 'none' });
 
     // STEP 2: WRITER Enters (Scrolls in from bottom / Grows 0vh -> 57vh)
-    tl.to(word2, { height: '57vh', ease: 'none' });
+    tl.to(word2, { height: '26vh', ease: 'none' });
 
     // STEP 3: WRITER Shrinks (57vh -> 28vh)
-    tl.to(word2, { height: '28vh', ease: 'none' });
+    // tl.to(word2, { height: '28vh', ease: 'none' });
 
     // STEP 4: DESIGNER Enters (Grows 0vh -> 29vh)
     tl.to(word3, { height: '29vh', ease: 'none' });
@@ -82,7 +82,7 @@
     </div>
 
     <div class="word-block hidden-start" bind:this={word2}>
-      <svg width="100%" height="100%" viewBox="0 0 200 21" preserveAspectRatio="none">
+      <svg width="100%" height="100%" viewBox="0 0 200 25" preserveAspectRatio="none">
         <text 
           x="0" y="50%" dominant-baseline="central" text-anchor="start"
           textLength="200" lengthAdjust="spacingAndGlyphs" class="word-text"
@@ -107,7 +107,7 @@
 
   <div class="bio-container" bind:this={bioElement}>
     <p class="bio-text">
-        Based in Bengaluru.<br>
+        Pushing boundaries every day.<br>
         Crafting visual narratives across mediums.<br>
         Obsessed with noise, light, and time.
     </p>
