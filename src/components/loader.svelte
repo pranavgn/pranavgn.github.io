@@ -9,7 +9,7 @@
 
   // --- 1. AUTO-DETECT GALLERY IMAGES ---
   // Using the same glob pattern as gallery.svelte to find all project assets
-  const galleryModules = import.meta.glob('/public/*/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
+  const galleryModules = import.meta.glob('/public/*/*.{webp}', { eager: true, as: 'url' });
   
   // Clean paths to match how they are served (removing '/public' prefix)
   const galleryImages = Object.keys(galleryModules).map(path => {
@@ -20,7 +20,7 @@
   // Explicitly add assets from Hero/About that aren't caught by the glob
   const staticAssets = [
     '/Title.svg',
-    '/2025/20251.png'
+    '/2025/20251.webp'
   ];
 
   // Combine all assets into a single load queue

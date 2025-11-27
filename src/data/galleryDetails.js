@@ -1,183 +1,183 @@
-// The key must match the folder path relative to public, e.g., "/2023/my-image.jpg"
+// The key must match the folder path relative to public, e.g., "/2023/my-image.webp"
 export const imageDetails = {
   // 2025
-  "/2025/20251.png": {
+  "/2025/20251.webp": {
     title: "DoP Reel",
     caption: "Compilation of my best work from 2025, Resolve",
     link: 'https://player.vimeo.com/video/1140356214?h=f33abcc2e6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;'
   },
   // 2024
-  "/2024/20241.jpg": {
+  "/2024/20241.webp": {
     title: "Pacifica\'05 Trailer",
     caption: "Trailer for scrapped short film, Resolve",
     link: 'https://player.vimeo.com/video/1065131005?h=452a4ef554&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;'
   },
   // 2023
-  "/2023/20231.png": {
+  "/2023/20231.webp": {
     title: "Terrace Poster",
     caption: "Promotional Poster for Wisconsin Union, 50x70cm, Illustrator"
   },
-  "/2023/20232.png": {
+  "/2023/20232.webp": {
     title: "What's Next Now",
     caption: "Union Theater Lobby Banner, 4 Frame Split Print, 70x100cm each, Photoshop/Indesign"
   },
-  "/2023/20233.png": {
+  "/2023/20233.webp": {
     title: "Investor Birthday Card",
     caption: "Birthday Postcard for Wisconsin Union Investors, 5x7\", Illustrator"
   },
   // 2022
   //2021
-  "/2021/20211.jpg": {
+  "/2021/20211.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Indesign/Blender"
   },
-  "/2021/20212.jpg": {
+  "/2021/20212.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Indesign/Blender"
   },
-  "/2021/20213.jpg": {
+  "/2021/20213.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Indesign/Blender"
   },
-  "/2021/20214.jpg": {
+  "/2021/20214.webp": {
     title: "Art Nouveau",
     caption: "Mock Magazine Cover, Photoshop/Indesign"
   },
-  "/2021/20215.jpg": {
+  "/2021/20215.webp": {
     title: "Postmodern 1",
     caption: "Mock Book Cover, Photoshop/Indesign"
   },
-  "/2021/20216.jpg": {
+  "/2021/20216.webp": {
     title: "Vessel",
     caption: "Mock Tourism Poster, Photoshop/Indesign"
   },
-  "/2021/20217.jpg": {
+  "/2021/20217.webp": {
     title: "Urban Composite",
     caption: "Digital Composite, Photoshop"
   },
-  "/2021/20218.jpg": {
+  "/2021/20218.webp": {
     title: "Ripple",
     caption: "Social Media Poster, Photoshop"
   },
-  "/2021/20219.jpg": {
+  "/2021/20219.webp": {
     title: "Formless",
     caption: "Social Media Poster, Photoshop"
   },
-  "/2021/202110.jpg": {
+  "/2021/202110.webp": {
     title: "Urban Jungle",
     caption: "Social Media Poster, Photoshop"
   },
-  "/2021/202111.jpg": {
+  "/2021/202111.webp": {
     title: "Urban Jungle",
     caption: "Social Media Poster, Photoshop"
   },
-  "/2021/202112.jpg": {
+  "/2021/202112.webp": {
     title: "Wildflower",
     caption: "Social Media Poster, Photoshop"
   },
-  "/2021/202113.jpg": {
+  "/2021/202113.webp": {
     title: "Postmodern 2",
     caption: "Mock Book Cover, Photoshop"
   },
-  "/2021/202114.jpg": {
+  "/2021/202114.webp": {
     title: "Tropical Blood",
     caption: "Mock Event Poster, Photoshop"
   },
-  "/2021/202115.jpg": {
+  "/2021/202115.webp": {
     title: "Postmodern 3",
     caption: "Mock Book Cover, Photoshop"
   },
   //2020
-  "/2020/20201.jpg": {
+  "/2020/20201.webp": {
     title: "Meraki #11",
     caption: "Magazine Cover, Photoshop/Illustrator/Indesign"
   },
-  "/2020/20202.jpg": {
+  "/2020/20202.webp": {
     title: "LoC",
     caption: "Magazine Article Graphic, Photoshop/Illustrator/Indesign"
   },
-  "/2020/20203.jpg": {
+  "/2020/20203.webp": {
     title: "LoC",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2020/20204.jpg": {
+  "/2020/20204.webp": {
     title: "LoC",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2020/20205.jpg": {
+  "/2020/20205.webp": {
     title: "LoC",
     caption: "Magazine Digital Cover, Photoshop/Indesign"
   },
-  "/2020/20206.jpg": {
+  "/2020/20206.webp": {
     title: "LoC",
     caption: "Magazine Article Graphic, Photoshop/Indesign"
   },
-  "/2020/20207.jpg": {
+  "/2020/20207.webp": {
     title: "LoC",
     caption: "Magazine Article Graphic, Photoshop/Indesign"
   },
-  "/2020/20208.jpg": {
+  "/2020/20208.webp": {
     title: "Comedies of Errors",
     caption: "Magazine Article Cover, Photoshop/Indesign"
   },
-  "/2020/20209.jpg": {
+  "/2020/20209.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2020/202010.jpg": {
+  "/2020/202010.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2020/202011.jpg": {
+  "/2020/202011.webp": {
     title: "For Normal Humans",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
   // 2019
-  "/2019/20191.jpg": {
+  "/2019/20191.webp": {
     title: "Meraki #7",
     caption: "Magazine Cover, Photoshop/Indesign"
   },
-  "/2019/20192.jpg": {
+  "/2019/20192.webp": {
     title: "1M1B #ideservetheblue",
     caption: "CSR Outreach Poster, Photoshop"
   },
-  "/2019/20193.jpg": {
+  "/2019/20193.webp": {
     title: "1M1B #ideservetheblue",
     caption: "CSR Outreach Poster, Photoshop"
   },
-  "/2019/20194.jpg": {
+  "/2019/20194.webp": {
     title: "1M1B #ideservetheblue",
     caption: "CSR Outreach Poster, Photoshop"
   },
-  "/2019/20195.jpg": {
+  "/2019/20195.webp": {
     title: "1M1B #ideservetheblue",
     caption: "CSR Outreach Poster, Photoshop"
   },
-  "/2019/20196.jpg": {
+  "/2019/20196.webp": {
     title: "1M1B #ideservetheblue",
     caption: "CSR Outreach Poster, Photoshop"
   },
-  "/2019/20197.jpg": {
+  "/2019/20197.webp": {
     title: "To The Moon",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2019/201912.jpg": {
+  "/2019/201912.webp": {
     title: "Stumped?",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2019/201913.jpg": {
+  "/2019/201913.webp": {
     title: "Stumped?",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2019/201914.jpg": {
+  "/2019/201914.webp": {
     title: "Stumped?",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2019/201915.jpg": {
+  "/2019/201915.webp": {
     title: "Stumped?",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
-  "/2019/201916.jpg": {
+  "/2019/201916.webp": {
     title: "Stumped?",
     caption: "Magazine Digital Typeset, Photoshop/Indesign"
   },
