@@ -48,6 +48,7 @@
         trigger: "body",
         start: "top top",
         end: `+=${scrollDistance}`,
+        invalidateOnRefresh: true,
         scrub: true,
         markers: false
       }

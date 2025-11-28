@@ -30,22 +30,10 @@
       }
     });
 
-    // STEP 1: FILMMAKER Shrinks (85vh -> 28vh)
     tl.to(word1, { height: '28vh', ease: 'none' });
-
-    // STEP 2: WRITER Enters (Scrolls in from bottom / Grows 0vh -> 57vh)
     tl.to(word2, { height: '26vh', ease: 'none' });
-
-    // STEP 3: WRITER Shrinks (57vh -> 28vh)
-    // tl.to(word2, { height: '28vh', ease: 'none' });
-
-    // STEP 4: DESIGNER Enters (Grows 0vh -> 29vh)
     tl.to(word3, { height: '29vh', ease: 'none' });
-
-    // STEP 5: ALL Shrink to final stack (Total ~42.5vh)
     tl.to([word1, word2, word3], { height: '15vh', ease: 'none' });
-
-    // STEP 6: Reveal Bio
     tl.to(bioElement, { autoAlpha: 1, duration: 0.5 });
   });
 </script>

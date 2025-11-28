@@ -138,7 +138,7 @@
           on:mouseleave={() => hoverImage = null}
           on:click={() => openOverlay(item)}
         >
-          <img src={item.src} alt={item.title} class="item-thumb" loading="lazy" />
+          <img src={item.src} alt={item.title} class="item-thumb" />
         </div>
       {/each}
     </div>
