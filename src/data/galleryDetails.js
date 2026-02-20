@@ -6,6 +6,10 @@ export const imageDetails = {
     caption: "Compilation of my best work from 2025, Resolve",
     link: 'https://player.vimeo.com/video/1140356214?h=f33abcc2e6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;'
   },
+  "/2025/20252.webp": {
+    title: "DoP Reel",
+    caption: "Casting Call Poster for short film, Indesign/Photoshop",
+  },
   // 2024
   "/2024/20241.webp": {
     title: "Pacifica\'05 Trailer",
