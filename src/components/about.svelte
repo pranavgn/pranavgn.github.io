@@ -1,64 +1,99 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
   
   let sectionElement;
   let word1, word2, word3;
   let bioElement;
+  let scrollTriggerInstance = null;
 
   onMount(async () => {
-    const { gsap } = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-    gsap.registerPlugin(ScrollTrigger);
-
     await new Promise(resolve => requestAnimationFrame(resolve));
 
-    // Initial Setup: Force GSAP values to match CSS start states
-    gsap.set(word1, { height: '85vh', zIndex: 3 });
-    gsap.set(word2, { height: '57vh', zIndex: 2 });
-    gsap.set(word3, { height: '28vh', zIndex: 1 });
+    const navHeight = 15;
+    const availableHeight = 85;
+    const equalHeight = availableHeight / 3;
+    const minFinalHeight = 8;
+    
+    gsap.set(word1, { height: `${availableHeight}vh`, top: `${navHeight}vh` });
+    gsap.set(word2, { height: '0vh', top: `${navHeight + availableHeight}vh` });
+    gsap.set(word3, { height: '0vh', top: `${navHeight + availableHeight}vh` });
     gsap.set(bioElement, { autoAlpha: 0 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionElement,
-        // Pin when top of section is 15% down the viewport (15vh offset)
-        start: "top 15%", 
-        end: "+=350%", 
-        scrub: true,
-        pin: true,
-        anticipatePin: 1
+    scrollTriggerInstance = ScrollTrigger.create({
+      trigger: sectionElement,
+      start: "top 15vh",
+      end: "+=600%",
+      scrub: 0.5,
+      pin: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const p = self.progress;
+        
+        let h1 = 0, h2 = 0, h3 = 0;
+        const bioStart = 0.70;
+        const bioEnd = 0.92;
+        
+        if (p < 0.20) {
+          const p1 = p / 0.20;
+          h1 = availableHeight - p1 * (availableHeight - equalHeight);
+          h2 = p1 * equalHeight;
+          h3 = p1 * equalHeight;
+        } else if (p < bioStart) {
+          const p2 = (p - 0.20) / (bioStart - 0.20);
+          const currentHeight = equalHeight - p2 * (equalHeight - minFinalHeight * 1.8);
+          h1 = currentHeight;
+          h2 = currentHeight;
+          h3 = currentHeight;
+        } else {
+          const p3 = (p - bioStart) / (1 - bioStart);
+          const currentHeight = minFinalHeight * 1.8 - p3 * (minFinalHeight * 1.8 - minFinalHeight);
+          h1 = currentHeight;
+          h2 = currentHeight;
+          h3 = currentHeight;
+        }
+        
+        const minH = 3;
+        h1 = Math.max(minH, h1);
+        h2 = Math.max(minH, h2);
+        h3 = Math.max(minH, h3);
+        
+        const top1 = navHeight;
+        const top2 = navHeight + h1;
+        const top3 = navHeight + h1 + h2;
+        
+        gsap.set(word1, { height: `${h1}vh`, top: `${top1}vh` });
+        gsap.set(word2, { height: `${h2}vh`, top: `${top2}vh` });
+        gsap.set(word3, { height: `${h3}vh`, top: `${top3}vh` });
+        
+        let bioProgress = 0;
+        if (p >= bioStart) {
+          bioProgress = Math.min(1, (p - bioStart) / (bioEnd - bioStart));
+        }
+        gsap.set(bioElement, { autoAlpha: bioProgress });
+        
+        const totalWordsHeight = h1 + h2 + h3;
+        const bioTop = navHeight + totalWordsHeight + 1;
+        gsap.set(bioElement, { top: `${bioTop}vh` });
       }
     });
+  });
 
-    tl.to(word1, { height: '28vh', ease: 'none' });
-    tl.to(word2, { height: '26vh', ease: 'none' });
-    tl.to(word3, { height: '29vh', ease: 'none' });
-    tl.to([word1, word2, word3], { height: '15vh', ease: 'none' });
-    tl.to(bioElement, { autoAlpha: 1, duration: 0.5 });
+  onDestroy(() => {
+    if (scrollTriggerInstance) {
+      scrollTriggerInstance.kill();
+      scrollTriggerInstance = null;
+    }
   });
 </script>
-
-<svelte:head>
-  <style>
-    @font-face {
-      font-family: 'Deuterium-Light';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Deuterium-Ultra';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 900;
-      font-style: normal;
-    }
-  </style>
-</svelte:head>
 
 <section class="about-section" bind:this={sectionElement}>
   <div class="stack-container">
     
-    <div class="word-block initial-full" bind:this={word1}>
+    <div class="word-block" bind:this={word1}>
       <svg width="100%" height="100%" viewBox="0 0 200 25" preserveAspectRatio="none">
         <text 
           x="0" y="50%" dominant-baseline="central" text-anchor="start"
@@ -69,7 +104,7 @@
       </svg>
     </div>
 
-    <div class="word-block hidden-start" bind:this={word2}>
+    <div class="word-block" bind:this={word2}>
       <svg width="100%" height="100%" viewBox="0 0 200 25" preserveAspectRatio="none">
         <text 
           x="0" y="50%" dominant-baseline="central" text-anchor="start"
@@ -80,7 +115,7 @@
       </svg>
     </div>
 
-    <div class="word-block hidden-start" bind:this={word3}>
+    <div class="word-block" bind:this={word3}>
       <svg width="100%" height="100%" viewBox="0 0 200 25" preserveAspectRatio="none">
         <text 
           x="0" y="50%" dominant-baseline="central" text-anchor="start"
@@ -103,47 +138,37 @@
 </section>
 
 <style>
-  /* Container for the pinned section */
   .about-section {
     position: relative;
     width: 100vw;
-    height: 100vh; 
+    height: 100vh;
     background-color: black;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
+    justify-content: flex-start;
   }
 
   .stack-container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* Ensure container doesn't overflow horizontally causing scrollbars */
-    overflow: hidden; 
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
 
   .word-block {
-    width: 98%; /* Prevent right-edge clipping on specific viewports */
-    margin: 0 auto; /* Center the block */
-    will-change: height;
+    position: absolute;
+    width: 98%;
+    left: 1%;
+    will-change: height, top;
     line-height: 0;
-    overflow: visible; /* CRITICAL: Allows SVG text to overhang slightly without clipping */
-  }
-
-  /* CSS Initial States to prevent Animation Glitches */
-  .initial-full {
-    height: 85vh;
-  }
-  .hidden-start {
-    height: 0;
+    overflow: hidden;
   }
 
   .word-block svg {
     display: block;
     width: 100%;
     height: 100%;
-    overflow: visible; /* Double insurance for clipping */
   }
 
   .word-text {
@@ -152,14 +177,15 @@
     font-size: 30px; 
   }
 
-  /* Bio Styling */
   .bio-container {
+    position: absolute;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     justify-content: center; 
     align-items: flex-start;
+    z-index: 10;
   }
 
   .bio-text {

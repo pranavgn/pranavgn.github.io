@@ -1,49 +1,43 @@
 <script>
-  import { onMount, tick } from 'svelte';
+  import { onMount, onDestroy, tick } from 'svelte';
   import Hero from './components/hero.svelte';
   import Loader from './components/loader.svelte';
   import Gallery from './components/gallery.svelte';
   import About from './components/about.svelte';
   import Contact from './components/contact.svelte';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   let loading = true;
+  let scrollTriggerInstances = [];
 
-  onMount(async () => {
-    // 1. DYNAMIC IMPORTS
-    const { gsap } = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-    const { ScrollToPlugin } = await import('gsap/ScrollToPlugin');
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-    // 2. THE RESET LOGIC
-    // Stop browser from automatically scrolling to the last known position
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    
-    // Force the window to the very top immediately
+  onMount(() => {
     window.scrollTo(0, 0);
   });
 
   async function handleLoaderDone() {
     loading = false;
     
-    // Wait for the DOM to update (Loader removal)
-    await tick(); 
-
-    // Import GSAP to refresh calculations
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+    await tick();
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    await new Promise(resolve => requestAnimationFrame(resolve));
     
-    // Recalculate start/end points now that the loader is gone.
-    // We do NOT scroll to any hash here. We just refresh the math.
     ScrollTrigger.refresh();
   }
+
+  onDestroy(() => {
+    scrollTriggerInstances.forEach(st => st.kill());
+    scrollTriggerInstances = [];
+    ScrollTrigger.getAll().forEach(st => st.kill());
+  });
 </script>
 
 <main>
-  <Loader on:done={handleLoaderDone} />
+  {#if loading}
+    <Loader on:done={handleLoaderDone} />
+  {/if}
   
-  <div class="content-wrapper">
+  <div class="content-wrapper" class:hidden={loading}>
       <Hero />
       <section id="work">
             <Gallery />
@@ -58,8 +52,16 @@
 </main>
 
 <style>
-  /* Ensure smooth scrolling is handled by GSAP, not CSS */
   :global(html) {
     scroll-behavior: auto !important;
+  }
+  
+  .content-wrapper {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .content-wrapper.hidden {
+    opacity: 0;
   }
 </style>

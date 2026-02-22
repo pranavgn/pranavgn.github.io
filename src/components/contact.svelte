@@ -1,23 +1,5 @@
 <script>
-  // No specific logic requested, but ready for GSAP if needed later.
 </script>
-
-<svelte:head>
-  <style>
-    @font-face {
-      font-family: 'Deuterium-Light';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Deuterium-Ultra';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 900;
-      font-style: normal;
-    }
-  </style>
-</svelte:head>
 
 <section class="contact-section">
   
@@ -36,7 +18,6 @@
 </section>
 
 <style>
-  /* Main Container */
   .contact-section {
     position: relative;
     width: 100vw;
@@ -48,18 +29,16 @@
     overflow: hidden;
   }
 
-  /* Center Content Wrapper */
   .center-container {
-    flex-grow: 1; /* Takes up all available space */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  /* Mail Link Styling */
   .mail-link {
     font-family: 'Deuterium-Ultra', sans-serif;
-    font-size: 10vw; /* Responsive large size */
+    font-size: 10vw;
     color: white;
     text-decoration: none;
     line-height: 1;
@@ -73,20 +52,19 @@
     text-decoration: underline;
   }
 
-  /* Footer Styling */
   .social-footer {
     width: 100%;
     box-sizing: border-box;
-    padding: 30px 40px; /* Adjust padding as needed */
+    padding: 30px 40px;
     
     display: flex;
-    justify-content: space-between; /* Justified spread */
+    justify-content: space-between;
     align-items: flex-end;
   }
 
   .social-footer a {
     font-family: 'Deuterium-Light', sans-serif;
-    font-size: 14px; /* Matches style of hero scroll text approx */
+    font-size: 14px;
     color: white;
     text-decoration: none;
     letter-spacing: 0.1em;

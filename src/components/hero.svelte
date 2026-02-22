@@ -1,177 +1,135 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { spring } from 'svelte/motion';
   import { fade } from 'svelte/transition';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-  // References
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
   let headerElement;
-  let imageElement;
   let navElement;
-  let scrollIndicator; 
+  let scrollIndicator;
   let noiseCanvas;
 
-  // Configuration
-  const scrollDistance = '85%'; 
+  let noiseOpacity = 0.3;
+  let noiseScale = 1;
+  let noiseSpeed = 24;
+  let noiseIntensity = 80;
+  let noiseContrast = 1.6;
 
-  // NOISE CONFIGURATION VARIABLES
-  let noiseOpacity = 0.3; 
-  let noiseScale = 1; 
-  let noiseSpeed = 24; 
-  let noiseIntensity = 80; 
-  let noiseContrast = 1.6; 
-
-  // --- INTERACTION STATE ---
   let isPlaying = false;
   let isHoveringTrigger = false;
-   
-  // Cursor Logic
+
   let coords = spring({ x: 0, y: 0 }, { stiffness: 0.1, damping: 0.25 });
   function handleMouseMove(e) { coords.set({ x: e.clientX, y: e.clientY }); }
 
+  let scrollTriggerInstance = null;
+  let noiseAnimationId = null;
+  let noiseCtx = null;
+  let noiseBuffer = null;
+
   onMount(async () => {
-    const { gsap } = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     
     await new Promise(resolve => requestAnimationFrame(resolve));
-    
-    // 1. Initial Setup 
-    // This acts as the "source of truth" before the timeline takes over
-    gsap.set(headerElement, { height: '100vh' });
-    gsap.set(imageElement, { height: '100%', marginBottom: '0px' }); // Ensure margins are reset here
-    gsap.set(navElement, { autoAlpha: 0, y: 10 });
-    gsap.set(scrollIndicator, { autoAlpha: 1, y: 0 }); 
 
-    // 2. Timeline
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: `+=${scrollDistance}`,
-        invalidateOnRefresh: true,
-        scrub: true,
-        markers: false
+    gsap.set(navElement, { autoAlpha: 0 });
+    gsap.set(scrollIndicator, { autoAlpha: 1 });
+
+    scrollTriggerInstance = ScrollTrigger.create({
+      trigger: ".hero-spacer",
+      start: "top top",
+      end: "bottom top",
+      invalidateOnRefresh: true,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const easedProgress = Math.pow(progress, 3);
+        
+        gsap.set(headerElement, {
+          height: `${100 - (easedProgress * 85)}vh`,
+          force3D: true
+        });
+        
+        gsap.set(scrollIndicator, { 
+          autoAlpha: 1 - progress * 5, 
+          y: -20 * Math.min(progress * 5, 1) 
+        });
+        
+        gsap.set(navElement, { 
+          autoAlpha: Math.min(1, Math.max(0, (progress - 0.7) * 3.33)), 
+        });
       }
     });
 
-    // 3. Animations - Add immediateRender: false
-    
-    timeline.fromTo(headerElement, 
-      { height: '100vh' }, 
-      { 
-        height: '15vh', 
-        ease: "none",
-        immediateRender: false // <--- THE FIX
-      }, 
-      0
-    );
-
-    timeline.fromTo(imageElement, 
-      { height: '100%', marginBottom: '0px' }, 
-      { 
-        height: '8vh', 
-        marginBottom: '10px', 
-        ease: "none",
-        immediateRender: false // <--- THE FIX
-      }, 
-      0
-    );
-    
-    timeline.to(scrollIndicator, {
-      autoAlpha: 0,
-      y: -20, 
-      ease: "power1.out",
-      duration: 0.2 
-    }, 0);
-    
-    timeline.to(navElement, {
-      autoAlpha: 1,
-      y: 0,
-      ease: "none"
-    }, 0.2);
-
-    // 4. Force a refresh to ensure start/end positions are calculated 
-    // correctly after the browser handles the #hash jump
     ScrollTrigger.refresh();
-    
     setupNoiseAnimation();
   });
 
-  async function smoothScrollTo(id, e) {
-    e.preventDefault(); // Stop the browser from jumping instantly
-    
-    const { gsap } = await import('gsap');
-    const { ScrollToPlugin } = await import('gsap/ScrollToPlugin');
-    gsap.registerPlugin(ScrollToPlugin);
+  onDestroy(() => {
+    if (scrollTriggerInstance) {
+      scrollTriggerInstance.kill();
+      scrollTriggerInstance = null;
+    }
+    if (noiseAnimationId) {
+      cancelAnimationFrame(noiseAnimationId);
+      noiseAnimationId = null;
+    }
+    ScrollTrigger.getAll().forEach(st => st.kill());
+  });
 
+  function smoothScrollTo(id, e) {
+    e.preventDefault();
     gsap.to(window, {
       duration: 1.2,
-      scrollTo: {
-        y: id,
-        autoKill: false
-      },
+      scrollTo: { y: id, autoKill: false },
       ease: "power4.inOut"
     });
   }
 
-  async function scrollToSection(id) {
-    const { gsap } = await import('gsap');
-    const { ScrollToPlugin } = await import('gsap/ScrollToPlugin');
-    gsap.registerPlugin(ScrollToPlugin);
-
+  function scrollToSection(id) {
     gsap.to(window, {
-      duration: 1.5,          // Slower duration for a cinematic feel
-      scrollTo: {
-        y: id,
-        autoKill: false       // Allows the user to interrupt if they grab the scrollbar
-      },
-      ease: "power4.inOut"    // The smoothest ease for long-distance scrolling
+      duration: 1.5,
+      scrollTo: { y: id, autoKill: false },
+      ease: "power4.inOut"
     });
   }
 
   function setupNoiseAnimation() {
     if (!noiseCanvas) return;
     
-    const ctx = noiseCanvas.getContext('2d');
+    noiseCtx = noiseCanvas.getContext('2d', { willReadFrequently: true });
     const width = noiseCanvas.width;
     const height = noiseCanvas.height;
     
-    function generateNoise() {
-      const imageData = ctx.createImageData(width, height);
-      const buffer = new Uint32Array(imageData.data.buffer);
-      
-      const len = buffer.length;
-      for (let i = 0; i < len; i++) {
-        const baseValue = Math.random() * noiseIntensity;
-        const contrastAdjusted = Math.pow(baseValue / noiseIntensity, noiseContrast) * noiseIntensity;
-        const value = Math.floor(contrastAdjusted);
-        buffer[i] = (255 << 24) | (value << 16) | (value << 8) | value;
+    const imageData = noiseCtx.createImageData(width, height);
+    noiseBuffer = new Uint32Array(imageData.data.buffer);
+    
+    const len = noiseBuffer.length;
+    let lastTime = 0;
+    const frameInterval = 1000 / noiseSpeed;
+    
+    function generateNoise(timestamp) {
+      if (timestamp - lastTime >= frameInterval) {
+        lastTime = timestamp;
+        
+        for (let i = 0; i < len; i++) {
+          const baseValue = Math.random() * noiseIntensity;
+          const contrastAdjusted = Math.pow(baseValue / noiseIntensity, noiseContrast) * noiseIntensity;
+          const value = Math.floor(contrastAdjusted);
+          noiseBuffer[i] = (255 << 24) | (value << 16) | (value << 8) | value;
+        }
+        noiseCtx.putImageData(imageData, 0, 0);
       }
-      ctx.putImageData(imageData, 0, 0);
+      
+      noiseAnimationId = requestAnimationFrame(generateNoise);
     }
     
-    const interval = 1000 / noiseSpeed;
-    setInterval(generateNoise, interval);
-    generateNoise(); 
+    noiseAnimationId = requestAnimationFrame(generateNoise);
   }
 </script>
-
-<svelte:head>
-  <style>
-    @font-face {
-      font-family: 'Deuterium-Light';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Deuterium-Ultra';
-      src: url('/fonts/Deuterium-Variable-Thin.ttf'); 
-      font-weight: 900;
-      font-style: normal;
-    }
-  </style>
-</svelte:head>
 
 <svelte:window on:mousemove={handleMouseMove} />
 
@@ -208,12 +166,13 @@
 {/if}
 
 <div class="header-ui" bind:this={headerElement}>
-  <img
-    src="/Title.svg"
-    alt="PRANAV NAIR"
-    class="hero-img"
-    bind:this={imageElement}
-  />
+  <div class="image-container">
+    <img
+      src="/Title.svg"
+      alt="PRANAV NAIR"
+      class="hero-img"
+    />
+  </div>
   
   <nav class="nav-links" bind:this={navElement}>
     <a href="/" on:click|preventDefault={() => scrollToSection("#work")}>WORK</a>
@@ -230,8 +189,10 @@
   </div>
 </div>
 
+<div class="hero-spacer"></div>
+
 <div class="scroll-flow">
-   
+    
   <div class="video-wrapper">
     <iframe
       src="https://player.vimeo.com/video/1124799064?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1&background=1&transparent=0"
@@ -244,8 +205,8 @@
     <canvas 
       bind:this={noiseCanvas}
       class="noise-overlay"
-      width="400"
-      height="400"
+      width="200"
+      height="200"
       style="opacity: {noiseOpacity}; transform: scale({noiseScale});"
     ></canvas>
 
@@ -271,47 +232,51 @@
 </div>
 
 <style>
-  /* Global Resets */
-  :global(html), :global(body) {
-    margin: 0;
-    padding: 0;
-    background-color: #000 !important;
-    overflow-x: hidden;
-  }
-
-  /* --- FIXED HEADER --- */
   .header-ui {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
+    height: 100vh;
     
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     
     z-index: 50;
     background-color: #000;
     overflow: hidden;
     will-change: height;
-    box-sizing: border-box;
-    padding-bottom: 1vh;
+    backface-visibility: hidden;
+  }
+
+  .image-container {
+    width: 100%;
+    height: calc(100% - 5vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .hero-img {
     display: block;
-    width: 100%; 
-    object-fit: fill; 
-    will-change: height;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    will-change: transform;
   }
 
   .nav-links {
+    position: absolute;
+    bottom: 2vh;
     display: flex;
     gap: 60px;
     height: 3vh;
     align-items: center;
     justify-content: center;
+    z-index: 60;
   }
 
   .nav-links a {
@@ -329,30 +294,29 @@
     cursor: crosshair;
   }
 
-  /* --- SCROLL INDICATOR STYLES --- */
   .scroll-indicator {
     position: absolute;
-    bottom: 3vh;
+    bottom: 8vh;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Increased gap slightly for the taller arrow */
+    gap: 15px;
     z-index: 60;
   }
 
   .scroll-text {
     font-family: 'Deuterium-Light', sans-serif;
     color: white;
-    font-size: 14px; /* Slightly larger than previous 0.75rem */
+    font-size: 14px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
   .scroll-arrow {
     width: 20px;
-    height: 60px; /* Taller dimension for the long arrow style */
+    height: 60px;
     overflow: visible;
     animation: bounce 2s infinite ease-in-out;
   }
@@ -369,12 +333,15 @@
     60% { transform: translateY(-5px); }
   }
 
-  /* --- SCROLL FLOW --- */
+  .hero-spacer {
+    height: 150vh;
+    width: 100%;
+  }
+
   .scroll-flow {
     position: relative;
     width: 100vw;
     z-index: 1;
-    padding-top: 100vh; 
   }
 
   .video-wrapper {
@@ -412,9 +379,9 @@
     mix-blend-mode: overlay;
     image-rendering: pixelated;
     transform-origin: center;
+    will-change: contents;
   }
 
-  /* --- CENTER TRIGGER CONTAINER --- */
   .center-trigger {
     position: absolute;
     top: 50%; left: 50%;
@@ -431,25 +398,20 @@
     display: block; 
   }
 
-  /* --- TRIGGER IMAGE STYLES --- */
   .trigger-img {
     width: 100%;
     height: auto;
     display: block;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-
-    /* Base state: Grayscale */
     filter: grayscale(100%); 
     transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  /* Hover on container -> Affects Image */
   .center-trigger:hover .trigger-img {
       filter: grayscale(0%);
       transform: scale(1.02);
   }
 
-  /* --- TRIANGLE PLAY BUTTON OVERLAY STYLES --- */
   .play-button-overlay {
     position: absolute;
     top: 50%;
@@ -467,13 +429,11 @@
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
   }
 
-  /* Hover on container -> Affects Play Button */
   .center-trigger:hover .play-button-overlay {
       transform: translate(-50%, -50%) scale(1.15);
       filter: brightness(0.9);
   }
 
-  /* Click (Active) on container -> Affects Play Button */
   .center-trigger:active .play-button-overlay {
       transform: translate(-50%, -50%) scale(1.08);
       filter: brightness(0.8);
@@ -486,7 +446,6 @@
     filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
   }
 
-  /* --- CUSTOM CURSOR --- */
   .cursor-play {
     position: fixed;
     top: 0; left: 0;
@@ -505,7 +464,6 @@
     text-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
    
-  /* --- OVERLAY FIXED --- */
   .overlay {
     position: fixed; 
     top: 0; 
@@ -568,5 +526,6 @@
     .center-trigger { width: 80vw; } 
     .play-button-overlay { width: 90px; height: 60px; }
     .video-embed-wrapper { width: 95%; }
+    .nav-links { gap: 30px; }
   }
 </style>

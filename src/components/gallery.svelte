@@ -2,16 +2,18 @@
   import { spring } from 'svelte/motion';
   import { fade, fly } from 'svelte/transition';
   import { imageDetails } from '../data/galleryDetails.js';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  // --- HELPER: Extract Vimeo ID from URL ---
+  gsap.registerPlugin(ScrollTrigger);
+
   function getVimeoId(url) {
     if (!url) return null;
     const match = url.match(/vimeo\.com\/(\d+)/);
     return match ? match[1] : url; 
   }
 
-  // --- 1. PROGRAMMATIC DATA LOADING ---
   const imageModules = import.meta.glob('/public/*/*.{jpg,jpeg,png,webp}', { eager: true, as: 'url' });
   
   const targetYears = ["2025", "2024", "2023", "2022", "2021", "2020", "2019"];
@@ -35,45 +37,46 @@
       return { year, items };
   }).filter(group => group.items.length > 0);
 
-  // --- STATE ---
   let activeImage = null; 
   let hoverImage = null;  
 
-  // --- GSAP ANIMATION ---
   let yearHeaders = []; 
+  let scrollTriggerInstances = [];
 
   onMount(async () => {
-    const { gsap } = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-    gsap.registerPlugin(ScrollTrigger);
-
     await new Promise(resolve => requestAnimationFrame(resolve));
 
-   yearHeaders.forEach((header) => {
+    yearHeaders.forEach((header) => {
       if (!header) return;
 
-      gsap.to(header, {
-        height: '5vh', 
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: header,
-          start: "top 15%", 
-          end: "+=80%",
-          scrub: true,
-          pin: true,
-          pinSpacing: false,
-          onLeave: () => gsap.set(header, { height: '5vh' }),
-          onEnterBack: () => gsap.set(header, { height: '5vh' })
+      const st = ScrollTrigger.create({
+        trigger: header,
+        start: "top 15%", 
+        end: "+=80%",
+        pin: true,
+        pinSpacing: false,
+        scrub: 0.3,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.set(header, { 
+            scaleY: Math.max(0.1, 1 - progress * 0.9),
+            transformOrigin: 'top center'
+          });
         }
       });
+      
+      scrollTriggerInstances.push(st);
     });
   });
 
-  // --- CURSOR LOGIC ---
+  onDestroy(() => {
+    scrollTriggerInstances.forEach(st => st.kill());
+    scrollTriggerInstances = [];
+  });
+
   let coords = spring({ x: 0, y: 0 }, { stiffness: 0.1, damping: 0.25 });
   function handleMouseMove(e) { coords.set({ x: e.clientX, y: e.clientY }); }
 
-  // --- NAVIGATION LOGIC ---
   const flatGallery = galleryData.flatMap(group => group.items);
   let activeIndex = -1; 
   
@@ -196,7 +199,6 @@
 {/if}
 
 <style>
-  /* --- MAIN GALLERY STYLES --- */
   .gallery {
     background: black;
     color: white;
@@ -205,7 +207,6 @@
     overflow-x: hidden; 
   }
 
-  /* --- YEAR HEADER (ANIMATED) --- */
   .year-header {
     width: 100%; 
     height: 50vh; 
@@ -215,11 +216,12 @@
     display: block; 
     position: relative;
     z-index: 40; 
-    will-change: height;
+    will-change: transform;
+    transform: translateZ(0);
     overflow: hidden;
+    transform-origin: top center;
   }
   
-  /* UPDATED: Ensure SVG is block to remove inline gap */
   .year-header svg {
     display: block;
     width: 100%;
@@ -231,20 +233,17 @@
     font-size: 30px; fill: white;
   }
 
-  /* --- FLOATING CONTAINER --- */
   .floating-container {
     display: flex; flex-wrap: wrap; 
     justify-content: center; 
-    /* UPDATED: Changed from center to flex-start to pull items to top edge */
     align-items: flex-start;
     padding: 0 20px 60px 20px; 
-    /* UPDATED: Negative margin to kill sub-pixel gaps */
     margin-top: -1px; 
     width: 100%; box-sizing: border-box;
     position: relative;
     z-index: 10;
     background: black;
-    gap: 60px; /* Only applies between items, not top edge */
+    gap: 60px;
   }
 
   .image-item {
@@ -263,7 +262,6 @@
 
   .image-item:hover .item-thumb { filter: grayscale(0%); opacity: 0.2; }
 
-  /* --- CURSOR PREVIEW --- */
   .cursor-preview {
     position: fixed; top: 0; left: 0;
     width: 300px; pointer-events: none; z-index: 50;
@@ -271,7 +269,6 @@
   }
   .cursor-preview img { width: 100%; display: block; }
 
-  /* --- OVERLAY --- */
   .overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.95); z-index: 100;
@@ -283,14 +280,12 @@
     max-width: 90vw; max-height: 80vh; object-fit: contain;
   }
 
-  /* --- VIMEO EMBED STYLES --- */
   .video-wrapper {
     aspect-ratio: 1.89 / 1;
     width: min(80vw, 70vh * 1.89); 
     position: relative;
     overflow: hidden; 
     background: black; 
-    /* box-shadow: 0 0 30px rgba(0,0,0,0.5); */
   }
 
   .vimeo-embed {
@@ -312,7 +307,6 @@
     text-align: center; border-top: 1px solid #333;
   }
 
-  /* --- BUTTONS --- */
   .nav-btn {
     position: absolute; background: transparent; 
     border: none; padding: 20px;

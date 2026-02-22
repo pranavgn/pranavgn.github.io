@@ -1,9 +1,18 @@
-import { mount } from 'svelte'
-import './app.css'
-import App from './App.svelte'
+import { mount } from 'svelte';
+import './app.css';
+import App from './App.svelte';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-const app = mount(App, {
-  target: document.getElementById('app'),
-})
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.config({ force3D: true, nullTargetWarn: false });
+ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true });
 
-export default app
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+mount(App, { target: document.getElementById('app') });
+
+export { gsap, ScrollTrigger, ScrollToPlugin };
